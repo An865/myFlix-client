@@ -1,5 +1,7 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import "./movie-view.scss";
+import Button from "react-bootstrap/Button";
 
 export class MovieView extends React.Component {
   render() {
@@ -18,13 +20,15 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
-        <button
+        <Button
+          variant="primary"
+          type="submit"
           onClick={() => {
             onBackClick(null);
           }}
         >
           Back
-        </button>
+        </Button>
       </div>
     );
   }
@@ -47,5 +51,5 @@ MovieView.propTypes = {
       Death: PropTypes.string,
     }),
   }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  onBackClick: PropTypes.func.isRequired,
 };

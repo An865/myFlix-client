@@ -1,6 +1,8 @@
-// used to created component
 import React from "react";
 import axios from "axios";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./main-view.scss";
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieCard } from "../movie-card/movie-card";
@@ -78,28 +80,32 @@ class MainView extends React.Component {
 
     //if there is a selected movie show movieView else show movieCards
     return (
-      <div className="main-view">
+      <Row className="main-view justify-content-md-center">
         {/*If the state of `selectedMovie` is not null, that selected movie
        will be returned otherwise, all *movies will be returned*/}
         {selectedMovie ? (
-          <MovieView
-            movie={selectedMovie}
-            onBackClick={(newSelectedMovie) => {
-              this.setSelectedMovie(newSelectedMovie);
-            }}
-          />
-        ) : (
-          movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onMovieClick={(newSelectedMovie) => {
+          <Col md={8}>
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={(newSelectedMovie) => {
                 this.setSelectedMovie(newSelectedMovie);
               }}
             />
+          </Col>
+        ) : (
+          movies.map((movie) => (
+            <Col md={3}>
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onMovieClick={(newSelectedMovie) => {
+                  this.setSelectedMovie(newSelectedMovie);
+                }}
+              />
+            </Col>
           ))
         )}
-      </div>
+      </Row>
     );
   }
 }

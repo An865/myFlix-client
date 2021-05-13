@@ -1,0 +1,11 @@
+.my-flix {
+  color: steelblue;
+}
+.movie-poster {
+  height: 250px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+/*# sourceMappingURL=index.HASH_REF_709257314ed7c59246c4f4ddd22b8a02.css.map */

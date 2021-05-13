@@ -1,0 +1,4 @@
+.movie-card {
+  background-color: bisque;
+  margin: 10px;
+}
