@@ -1,72 +1,90 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+//Packages
+import React, { useState } from 'react';
+// import PropTypes from 'prop-types';
+import axios from 'axios';
+
+//Bootstrap Components
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 export function RegistrationView(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthdate, setBirthdate] = useState("");
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [birthdate, setBirthdate] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password, email, birthdate);
-    /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onRegister(username);
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //create new user with axios post request
+        let registerUrl = 'https://spiremyflix.herokuapp.com/users';
 
-  return (
-    <Form>
-      <Form.Group controlId="formBasicUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          placeholder="Enter Username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </Form.Group>
+        axios
+            .post(registerUrl, {
+                Username: username,
+                Password: password,
+                Email: email,
+                Birth: birthdate,
+            })
+            .then((response) => {
+                const data = response.data;
+                console.log(data);
+                window.alert('successful registration');
+                window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+            })
+            .catch((e) => {
+                console.log('error registering the user');
+                console.log(e);
+            });
+    };
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          placeholder="Enter Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Form.Group>
+    return (
+        <Form>
+            <Form.Group controlId="formUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+            </Form.Group>
 
-      <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="text"
-          value={email}
-          placeholder="Enter Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form.Group>
+            <Form.Group controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Enter Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength={8}
+                    required
+                />
+            </Form.Group>
 
-      <Form.Group controlId="formBasicBirthdate">
-        <Form.Label>Birthdate</Form.Label>
-        <Form.Control
-          type="text"
-          value={birthdate}
-          placeholder="Enter Birthdate"
-          onChange={(e) => setBirthdate(e.target.value)}
-        />
-      </Form.Group>
+            <Form.Group controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Form>
-  );
+            <Form.Group controlId="formBirthdte">
+                <Form.Label>Birthdate (YYYY-MM-DD)</Form.Label>
+                <Form.Control
+                    type="date"
+                    onChange={(e) => setBirthdate(e.target.value)}
+                />
+            </Form.Group>
+
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Submit
+            </Button>
+        </Form>
+    );
 }
 
 // establish prop types
-RegistrationView.propTypes = {
-  onRegister: PropTypes.func.isRequired,
-};
+// RegistrationView.propTypes = {
+//     onRegister: PropTypes.func.isRequired,
+// };

@@ -1,0 +1,5 @@
+.card-body {
+  margin: 10px;
+  height: 150%;
+  width: 150%;
+}
