@@ -1,13 +1,20 @@
 //Packages
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // Bootstrap Components
 import { Button, Form } from 'react-bootstrap';
 
 export function ProfileView(props) {
     //passed data
-    const { user, userData } = props;
+    const { movies, userData } = props;
+
+    //favorite movies
+    let arrayOfFavorites = userData.FavoriteMovies;
+    let favorites = movies.filter((movie) =>
+        arrayOfFavorites.includes(movie._id)
+    );
 
     //state
     const [username, setUsername] = useState('');
@@ -15,6 +22,7 @@ export function ProfileView(props) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthdate, setBirthdate] = useState('');
+    const [favoriteMovies, setfavoriteMovies] = useState([]);
 
     //update user info with axios put request
     const updateInfo = (e) => {
@@ -52,7 +60,6 @@ export function ProfileView(props) {
     return (
         <div>
             <h1>Welcome {userData.Username}!</h1>
-
             <Form>
                 <h5>Update Your Information:</h5>
                 <Form.Group controlId="formUsername">
@@ -109,11 +116,19 @@ export function ProfileView(props) {
                         }}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={updateInfo}>
-                    Update
-                </Button>
             </Form>
+
+            <h5>Favorite Movies:</h5>
+            {favorites.map((favmov) => {
+                <ul>
+                    <li>
+                        <Link to={`/movies/${favmov._id}`}>{favmov.Title}</Link>
+                        {console.log(favmov.Title)}
+                    </li>
+                </ul>;
+            })}
+
             <Button>Back</Button>
         </div>
-    );
-}
+    ); //end return
+} //end export functional component

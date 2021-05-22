@@ -33,6 +33,7 @@ class MainView extends React.Component {
         };
     }
 
+    //store user and token in local storage and get movies with access token
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
@@ -90,28 +91,11 @@ class MainView extends React.Component {
         });
     }
 
-    /* When a user successfully registers, this function updates the `registration' 
-  property in state to true */
-    // onRegister(registration) {
-    //     this.setState({
-    //         registration,
-    //     });
-    // }
-
     //render returns visual representation of component
     render() {
         const { movies, selectedMovie, userData, user, registration } =
             this.state;
 
-        /* If the user has not registered the RegistrationView is rendered */
-        // if (registration)
-        //     return (
-        //         <RegistrationView
-        //             onRegister={(register) => this.onRegister(register)}
-        //         />
-        //     );
-
-        //if there is a selected movie show movieView else show movieCards
         return (
             <Router>
                 <Navbar bg="light" expand="lg">
@@ -162,14 +146,14 @@ class MainView extends React.Component {
                                 );
                             return movies.map((m) => (
                                 <Col md={3} key={m._id}>
-                                    <MovieCard movie={m} />
+                                    <MovieCard movie={m} key={m._id} />
                                 </Col>
                             ));
                         }}
                     />
 
                     <Route
-                        path="/users"
+                        path="/register"
                         render={() => {
                             return (
                                 <Col>
@@ -246,7 +230,7 @@ class MainView extends React.Component {
                             return (
                                 <Col md={8}>
                                     <ProfileView
-                                        user={user}
+                                        movies={movies}
                                         userData={userData}
                                         onBackClick={() => history.goBack()}
                                     />

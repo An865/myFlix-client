@@ -26519,6 +26519,7 @@ try {
         registration: false
       };
     }
+    /*store user and token in local storage and get movies with access token*/
     componentDidMount() {
       let accessToken = localStorage.getItem('token');
       if (accessToken !== null) {
@@ -26570,30 +26571,15 @@ try {
         user: null
       });
     }
-    /*When a user successfully registers, this function updates the `registration'
-    property in state to true*/
-    /*onRegister(registration) {*/
-    /*this.setState({*/
-    /*registration,*/
-    /*});*/
-    /*}*/
     /*render returns visual representation of component*/
     render() {
       const {movies, selectedMovie, userData, user, registration} = this.state;
-      /*If the user has not registered the RegistrationView is rendered*/
-      // if (registration)
-      // return (
-      // <RegistrationView
-      // onRegister={(register) => this.onRegister(register)}
-      // />
-      // );
-      // if there is a selected movie show movieView else show movieCards
       return (
         /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 116,
+            lineNumber: 100,
             columnNumber: 13
           }
         }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Navbar, {
@@ -26602,7 +26588,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 117,
+            lineNumber: 101,
             columnNumber: 17
           }
         }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Navbar.Brand, {
@@ -26610,7 +26596,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 118,
+            lineNumber: 102,
             columnNumber: 21
           }
         }, ' ', /*#__PURE__*/_reactDefault.default.createElement("img", {
@@ -26622,7 +26608,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 120,
+            lineNumber: 104,
             columnNumber: 25
           }
         })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Navbar.Toggle, {
@@ -26630,7 +26616,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 128,
+            lineNumber: 112,
             columnNumber: 21
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Navbar.Collapse, {
@@ -26638,7 +26624,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 129,
+            lineNumber: 113,
             columnNumber: 21
           }
         }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterBootstrap.LinkContainer, {
@@ -26647,14 +26633,14 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 130,
+            lineNumber: 114,
             columnNumber: 25
           }
         }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Nav.Link, {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 134,
+            lineNumber: 118,
             columnNumber: 29
           }
         }, "My Account")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -26666,7 +26652,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 136,
+            lineNumber: 120,
             columnNumber: 25
           }
         }, "Logout"))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Row, {
@@ -26674,7 +26660,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 148,
+            lineNumber: 132,
             columnNumber: 17
           }
         }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26686,7 +26672,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 155,
+                  lineNumber: 139,
                   columnNumber: 37
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_loginViewLoginView.LoginView, {
@@ -26694,7 +26680,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 156,
+                  lineNumber: 140,
                   columnNumber: 41
                 }
               }))
@@ -26705,15 +26691,16 @@ try {
               __self: this,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 164,
+                lineNumber: 148,
                 columnNumber: 33
               }
             }, /*#__PURE__*/_reactDefault.default.createElement(_movieCardMovieCard.MovieCard, {
               movie: m,
+              key: m._id,
               __self: this,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 165,
+                lineNumber: 149,
                 columnNumber: 37
               }
             })));
@@ -26721,25 +26708,25 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 149,
+            lineNumber: 133,
             columnNumber: 21
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
-          path: "/users",
+          path: "/register",
           render: () => {
             return (
               /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Col, {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 175,
+                  lineNumber: 159,
                   columnNumber: 33
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_registrationViewRegistrationView.RegistrationView, {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 176,
+                  lineNumber: 160,
                   columnNumber: 37
                 }
               }))
@@ -26748,7 +26735,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 171,
+            lineNumber: 155,
             columnNumber: 21
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26760,7 +26747,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 186,
+                  lineNumber: 170,
                   columnNumber: 33
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_movieViewMovieView.MovieView, {
@@ -26769,7 +26756,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 187,
+                  lineNumber: 171,
                   columnNumber: 37
                 }
               }))
@@ -26778,7 +26765,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 182,
+            lineNumber: 166,
             columnNumber: 21
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26790,7 +26777,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 203,
+                  lineNumber: 187,
                   columnNumber: 40
                 }
               })
@@ -26801,7 +26788,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 205,
+                  lineNumber: 189,
                   columnNumber: 33
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_genreViewGenreView.GenreView, {
@@ -26810,7 +26797,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 206,
+                  lineNumber: 190,
                   columnNumber: 37
                 }
               }))
@@ -26819,7 +26806,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 199,
+            lineNumber: 183,
             columnNumber: 21
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26831,7 +26818,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 225,
+                  lineNumber: 209,
                   columnNumber: 40
                 }
               })
@@ -26842,7 +26829,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 227,
+                  lineNumber: 211,
                   columnNumber: 33
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_directorViewDirectorView.DirectorView, {
@@ -26851,7 +26838,7 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 228,
+                  lineNumber: 212,
                   columnNumber: 37
                 }
               }))
@@ -26860,7 +26847,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 221,
+            lineNumber: 205,
             columnNumber: 21
           }
         }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26872,17 +26859,17 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 247,
+                  lineNumber: 231,
                   columnNumber: 33
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement(_profileViewProfileView.ProfileView, {
-                user: user,
+                movies: movies,
                 userData: userData,
                 onBackClick: () => history.goBack(),
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 248,
+                  lineNumber: 232,
                   columnNumber: 37
                 }
               }))
@@ -26891,7 +26878,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 243,
+            lineNumber: 227,
             columnNumber: 21
           }
         })))
@@ -33573,7 +33560,7 @@ try {
           columnNumber: 13
         }
       }, "Submit"), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
-        to: `/users`,
+        to: `/register`,
         __self: this,
         __source: {
           fileName: _jsxFileName,
@@ -46907,18 +46894,23 @@ try {
   var _reactDefault = _parcelHelpers.interopDefault(_react);
   var _axios = require('axios');
   var _axiosDefault = _parcelHelpers.interopDefault(_axios);
+  var _reactRouterDom = require('react-router-dom');
   var _reactBootstrap = require('react-bootstrap');
   var _jsxFileName = "/Users/annespire/Desktop/Dev/CF/Full-Stack_Immersion/Achievement3/myFlix-client/src/components/profile-view/profile-view.jsx", _s = $RefreshSig$();
   function ProfileView(props) {
     _s();
     // passed data
-    const {user, userData} = props;
+    const {movies, userData} = props;
+    // favorite movies
+    let arrayOfFavorites = userData.FavoriteMovies;
+    let favorites = movies.filter(movie => arrayOfFavorites.includes(movie._id));
     // state
     const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
     const [confirmPassword, setConfirmPassword] = _react.useState('');
     const [email, setEmail] = _react.useState('');
     const [birthdate, setBirthdate] = _react.useState('');
+    const [favoriteMovies, setfavoriteMovies] = _react.useState([]);
     // update user info with axios put request
     const updateInfo = e => {
       e.preventDefault();
@@ -46949,28 +46941,28 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53,
+          lineNumber: 61,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h1", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 54,
+          lineNumber: 62,
           columnNumber: 13
         }
       }, "Welcome ", userData.Username, "!"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 56,
+          lineNumber: 63,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57,
+          lineNumber: 64,
           columnNumber: 17
         }
       }, "Update Your Information:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -46978,14 +46970,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58,
+          lineNumber: 65,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59,
+          lineNumber: 66,
           columnNumber: 21
         }
       }, "Username"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -46996,7 +46988,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 60,
+          lineNumber: 67,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47004,14 +46996,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 67,
+          lineNumber: 74,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 68,
+          lineNumber: 75,
           columnNumber: 21
         }
       }, "Email"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47022,7 +47014,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 69,
+          lineNumber: 76,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47030,14 +47022,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 76,
+          lineNumber: 83,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 77,
+          lineNumber: 84,
           columnNumber: 21
         }
       }, "Birthdate (YYYY-MM-DD)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47048,14 +47040,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 78,
+          lineNumber: 85,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86,
+          lineNumber: 93,
           columnNumber: 17
         }
       }, "Update Your Password:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47063,14 +47055,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87,
+          lineNumber: 94,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 88,
+          lineNumber: 95,
           columnNumber: 21
         }
       }, "New Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47081,7 +47073,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 89,
+          lineNumber: 96,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47089,14 +47081,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 96,
+          lineNumber: 103,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 97,
+          lineNumber: 104,
           columnNumber: 21
         }
       }, "Confirm Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47110,30 +47102,51 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 98,
+          lineNumber: 105,
           columnNumber: 21
         }
-      })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
-        variant: "primary",
-        type: "submit",
-        onClick: updateInfo,
+      }))), /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 112,
-          columnNumber: 17
+          lineNumber: 121,
+          columnNumber: 13
         }
-      }, "Update")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
+      }, "Favorite Movies:"), favorites.map(favmov => {
+        /*#__PURE__*/_reactDefault.default.createElement("ul", {
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 123,
+            columnNumber: 17
+          }
+        }, /*#__PURE__*/_reactDefault.default.createElement("li", {
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 124,
+            columnNumber: 21
+          }
+        }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
+          to: `/movies/${favmov._id}`,
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 125,
+            columnNumber: 25
+          }
+        }, favmov.Title), console.log(favmov.Title)));
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 116,
+          lineNumber: 131,
           columnNumber: 13
         }
       }, "Back"))
     );
   }
-  _s(ProfileView, "RZ8QlhopH7EfJVJCNB2z6v/WYUo=");
+  _s(ProfileView, "PCed9fL0mgG77x+QJbbuY9m3kMM=");
   _c = ProfileView;
   var _c;
   $RefreshReg$(_c, "ProfileView");
@@ -47143,7 +47156,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","react-bootstrap":"4n7hB","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","axios":"7rA65"}],"LSFfJ":[function(require,module,exports) {
+},{"react":"3b2NM","react-bootstrap":"4n7hB","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","axios":"7rA65","react-router-dom":"1PMSK"}],"LSFfJ":[function(require,module,exports) {
 'use strict';
 
 exports.__esModule = true;
