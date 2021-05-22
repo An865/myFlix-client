@@ -119,15 +119,14 @@ export function ProfileView(props) {
             </Form>
 
             <h5>Favorite Movies:</h5>
-            {favorites.map((favmov) => {
-                <ul>
+            <ul>
+                {favorites.map((favmov) => {
                     <li>
                         <Link to={`/movies/${favmov._id}`}>{favmov.Title}</Link>
                         {console.log(favmov.Title)}
-                    </li>
-                </ul>;
-            })}
-
+                    </li>;
+                })}
+            </ul>
             <Button>Back</Button>
         </div>
     ); //end return
