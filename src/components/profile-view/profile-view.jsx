@@ -31,13 +31,12 @@ export function ProfileView(props) {
         const deleteUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}`;
         axios
             .delete(deleteUrl, {
-                headers: {
-                    headers: { Authorization: `Bearer ${token}` },
-                },
+                headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
+                window.alert('account deleted');
                 window.open('/', '_self');
             })
             .catch((error) => console.error(error));
