@@ -24,6 +24,25 @@ export function ProfileView(props) {
     const [birthdate, setBirthdate] = useState('');
     const [favoriteMovies, setfavoriteMovies] = useState([]);
 
+    //delete user account
+    const deleteAccount = (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        const deleteUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}`;
+        axios
+            .delete(deleteUrl, {
+                headers: {
+                    headers: { Authorization: `Bearer ${token}` },
+                },
+            })
+            .then((response) => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.open('/', '_self');
+            })
+            .catch((error) => console.error(error));
+    };
+
     //update user info with axios put request
     const updateInfo = (e) => {
         e.preventDefault();
@@ -117,7 +136,7 @@ export function ProfileView(props) {
                     />
                 </Form.Group>
             </Form>
-
+            <Button onClick={updateInfo}> Update Account </Button>
             <h5>Favorite Movies:</h5>
             <ul>
                 {favorites.map((favmov) => {
@@ -127,6 +146,10 @@ export function ProfileView(props) {
                     </li>;
                 })}
             </ul>
+            <h5>Delete Your Account</h5>
+            <Button variant="danger" onClick={deleteAccount}>
+                Delete Account
+            </Button>
             <Button>Back</Button>
         </div>
     ); //end return
