@@ -25,6 +25,38 @@ export function ProfileView(props) {
     const [email, setEmail] = useState('');
     const [birthdate, setBirthdate] = useState('');
 
+    //validate form
+    const formValidation = () => {
+        let isValid = true;
+        if (username.trim().length < 5) {
+            window.alert(
+                'username must be alphanumeric and contain at least 5 characters'
+            );
+            isValid = false;
+        }
+        if (this.state.Password.trim().length < 3) {
+            window.alert(
+                'current and new password (minimum 4 characters) required'
+            );
+            isValid = false;
+        }
+        if (
+            !(
+                this.state.Email &&
+                this.state.Email.includes('.') &&
+                this.state.Email.includes('@')
+            )
+        ) {
+            window.alert('email address is required.');
+            isValid = false;
+        }
+        if (this.state.birthdate === '') {
+            window.alert('please enter birthdate YYYY-MM-DD');
+            isValid = false;
+        }
+        return isValid;
+    };
+
     //delete user account
     const deleteAccount = (e) => {
         e.preventDefault();
@@ -71,30 +103,32 @@ export function ProfileView(props) {
         //token and form data JSON object to be passed in put request
         const token = localStorage.getItem('token');
         const updateUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}`;
-
-        axios
-            .put(
-                updateUrl,
-                {
-                    Username: username,
-                    Password: password,
-                    Email: email,
-                    Birth: birthdate,
-                },
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            )
-            .then((response) => {
-                const data = response.data;
-                console.log(response);
-                //update local storage
-                localStorage.setItem('user', username);
-                alert('profile was updated successful');
-            })
-            .catch((e) => {
-                console.log('error updating user information');
-            });
+        let isValid = formValidation();
+        if (isValid) {
+            axios
+                .put(
+                    updateUrl,
+                    {
+                        Username: username,
+                        Password: password,
+                        Email: email,
+                        Birth: birthdate,
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
+                .then((response) => {
+                    const data = response.data;
+                    console.log(response);
+                    //update local storage
+                    localStorage.setItem('user', username);
+                    alert('profile was updated successful');
+                })
+                .catch((e) => {
+                    console.log('error updating user information');
+                });
+        }
     };
 
     return (

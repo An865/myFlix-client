@@ -7,17 +7,19 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 //Styling
 import './movie-card.scss';
+import movieImg from 'url:../../assets/images/tokillamockingbird.jpg';
 
 export class MovieCard extends React.Component {
     render() {
         const { movie } = this.props;
+        const fileName = movie.ImagePath;
+        const baseUrl = '../../assets/images/';
+        console.log(baseUrl + fileName);
 
         return (
             <Card border="secondary" bg="light">
-                <Card.Img
-                    variant="top"
-                    //src={`../../assets/images/${userData.Username}`}
-                />
+                <Card.Img variant="top" src={movieImg} />
+
                 <Card.Body className="card-body">
                     <Card.Title>{movie.Title}</Card.Title>
                     <Card.Text>{movie.Description}</Card.Text>
