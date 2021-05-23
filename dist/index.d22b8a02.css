@@ -6,4 +6,13 @@
 }
 
 
+.left {
+  text-align: left;
+  margin-left: 40px;
+  width: 15px;
+}
+
+.right {
+  text-align: right;
+}
 /*# sourceMappingURL=index.d22b8a02.css.map */

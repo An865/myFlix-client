@@ -2,13 +2,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 // Bootstrap Components
 import { Button, Form } from 'react-bootstrap';
+//Images and Styling
+import deleteimg from 'url:../../assets/icons/delete.png';
+import './profile-view.scss';
 
 export function ProfileView(props) {
     //passed data
-    const { movies, userData } = props;
+    const { movies, userData, onBackClick } = props;
 
     //favorite movies
     let arrayOfFavorites = userData.FavoriteMovies;
@@ -22,7 +24,6 @@ export function ProfileView(props) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthdate, setBirthdate] = useState('');
-    const [favoriteMovies, setfavoriteMovies] = useState([]);
 
     //delete user account
     const deleteAccount = (e) => {
@@ -40,6 +41,27 @@ export function ProfileView(props) {
                 window.open('/', '_self');
             })
             .catch((error) => console.error(error));
+    };
+
+    //delete movie from favorites
+    const deleteMovie = (e, movieId) => {
+        e.preventDefault();
+        console.log(movieId);
+        const deleteMovUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}/${movieId}`;
+        const token = localStorage.getItem('token');
+
+        axios
+            .delete(deleteMovUrl, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            .then((response) => {
+                const data = response.data;
+                console.log(response);
+                window.alert('deleted movie');
+            })
+            .catch((e) => {
+                console.log('error updating user information');
+            });
     };
 
     //update user info with axios put request
@@ -139,17 +161,40 @@ export function ProfileView(props) {
             <h5>Favorite Movies:</h5>
             <ul>
                 {favorites.map((favmov) => {
-                    <li>
-                        <Link to={`/movies/${favmov._id}`}>{favmov.Title}</Link>
-                        {console.log(favmov.Title)}
-                    </li>;
+                    return (
+                        <li key={favmov._id}>
+                            <span className="left">
+                                <Link to={`/movies/${favmov._id}`}>
+                                    {favmov.Title}
+                                </Link>
+                            </span>
+                            <span className="right">
+                                <img
+                                    className="left"
+                                    src={deleteimg}
+                                    alt="delete movie"
+                                    onClick={(e) => {
+                                        deleteMovie(e, favmov._id);
+                                    }}
+                                />
+                            </span>
+                        </li>
+                    );
                 })}
             </ul>
             <h5>Delete Your Account</h5>
             <Button variant="danger" onClick={deleteAccount}>
                 Delete Account
             </Button>
-            <Button>Back</Button>
+            <Button
+                variant="primary"
+                type="submit"
+                onClick={() => {
+                    onBackClick(null);
+                }}
+            >
+                Back
+            </Button>
         </div>
     ); //end return
 } //end export functional component

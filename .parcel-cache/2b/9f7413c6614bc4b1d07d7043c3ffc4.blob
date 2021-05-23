@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "delete.HASH_REF_628376d7dcdded62c47687dc2bbc2902.png"

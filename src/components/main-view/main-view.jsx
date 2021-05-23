@@ -2,11 +2,9 @@
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
-
 //Bootstrap components
 import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
 //myFlix components
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -15,9 +13,10 @@ import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
-
 //Styling
 import './main-view.scss';
+//Images
+import logo from 'url:../../assets/images/MyFlix.png';
 
 class MainView extends React.Component {
     //constructor is responsible for initializing this.state and creating component
@@ -102,9 +101,9 @@ class MainView extends React.Component {
                     <Navbar.Brand href="/">
                         {' '}
                         <img
-                            src="../../assets/MyFlix.png"
-                            width="30"
-                            height="30"
+                            src={logo}
+                            width="110"
+                            height="110"
                             className="d-inline-block align-top"
                             alt="myflix logo"
                         />
@@ -169,6 +168,7 @@ class MainView extends React.Component {
                             return (
                                 <Col md={8}>
                                     <MovieView
+                                        user={user}
                                         movie={movies.find(
                                             (m) =>
                                                 m._id === match.params.movieId

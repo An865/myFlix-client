@@ -1,0 +1,8 @@
+.left {
+  text-align: left;
+  width: 120px;
+}
+
+.right {
+  text-align: left;
+}

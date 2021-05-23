@@ -1,0 +1,6 @@
+.left {
+  display: inline-block;
+  text-align: right;
+  width: 15px;
+  height: 15px;
+}

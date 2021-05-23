@@ -1,0 +1,13 @@
+.my-flix {
+  color: steelblue;
+}
+.card-body {
+  margin: 10px;
+}
+
+
+.delete {
+  border: brown solid 3px;
+  margin-left: 30px;
+}
+/*# sourceMappingURL=index.HASH_REF_709257314ed7c59246c4f4ddd22b8a02.css.map */

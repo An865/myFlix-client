@@ -1,0 +1,17 @@
+li {
+  display: table;
+}
+
+span {
+  display: table-cell;
+}
+
+.left {
+  text-align: left;
+  margin-left: 20px;
+  width: 120px;
+}
+
+.right {
+  text-align: right;
+}

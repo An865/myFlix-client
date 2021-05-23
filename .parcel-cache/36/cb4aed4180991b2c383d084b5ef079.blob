@@ -1,0 +1,8 @@
+.delete {
+  border: brown solid 3px;
+  margin-left: 30px;
+}
+
+li {
+  border: coral solid 4px;
+}

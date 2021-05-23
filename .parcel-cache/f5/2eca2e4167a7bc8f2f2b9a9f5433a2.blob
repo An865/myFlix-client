@@ -1,0 +1,9 @@
+.left {
+  text-align: left;
+  width: 15px;
+  height: 15px;
+}
+
+.right {
+  text-align: left;
+}

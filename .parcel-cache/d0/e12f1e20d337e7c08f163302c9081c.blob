@@ -1,0 +1,4 @@
+.delete {
+  border: brown solid 3px;
+  margin-left: 30px;
+}
