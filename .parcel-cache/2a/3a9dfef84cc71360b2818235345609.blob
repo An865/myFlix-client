@@ -34,13 +34,13 @@ export function ProfileView(props) {
             );
             isValid = false;
         }
-        if (password.trim().length < 3) {
+        if (Password.trim().length < 3) {
             window.alert(
                 'current and new password (minimum 4 characters) required'
             );
             isValid = false;
         }
-        if (!(email && email.includes('.') && email.includes('@'))) {
+        if (!(Email && Email.includes('.') && Email.includes('@'))) {
             window.alert('email address is required.');
             isValid = false;
         }
@@ -133,7 +133,6 @@ export function ProfileView(props) {
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
-                        minlength="4"
                         type="text"
                         placeholder={userData.Username}
                         defaultValue={userData.Username}
@@ -163,7 +162,6 @@ export function ProfileView(props) {
                 <Form.Group controlId="formNewPassword">
                     <Form.Label>New Password</Form.Label>
                     <Form.Control
-                        minlength="4"
                         type="password"
                         placeholder="New Password"
                         defaultValue={userData.Password}

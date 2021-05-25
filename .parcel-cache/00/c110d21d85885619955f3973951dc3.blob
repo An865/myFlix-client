@@ -31544,7 +31544,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 module.exports = hoistNonReactStatics;
 
 },{"react-is":"68QIU"}],"5xk4i":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "tokillamockingbird.1ff2f049.jpg"
+module.exports = require('./bundle-url').getBundleURL() + "tokillamockingbird.HASH_REF_4b26b32a9c032cd962ca85f61ff2f049.jpg"
 },{"./bundle-url":"5IoJv"}],"5IoJv":[function(require,module,exports) {
 "use strict";
 
@@ -31792,7 +31792,7 @@ try {
 }
 
 },{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","prop-types":"4dfy5","react-bootstrap/Button":"1ru0l","react-router-dom":"1PMSK","./movie-view.scss":"4iZ2Z","url:../../assets/icons/like.png":"7HYOq","axios":"7rA65"}],"4iZ2Z":[function() {},{}],"7HYOq":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "like.d9df5ab3.png"
+module.exports = require('./bundle-url').getBundleURL() + "like.HASH_REF_a52445aa658013d30e96ef4bd9df5ab3.png"
 },{"./bundle-url":"5IoJv"}],"7rA65":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 },{"./lib/axios":"4qfhW"}],"4qfhW":[function(require,module,exports) {
@@ -47350,7 +47350,6 @@ try {
           columnNumber: 21
         }
       }, "Username"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
-        minlength: "4",
         type: "text",
         placeholder: userData.Username,
         defaultValue: userData.Username,
@@ -47366,14 +47365,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 143,
+          lineNumber: 142,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 144,
+          lineNumber: 143,
           columnNumber: 21
         }
       }, "Email"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47384,7 +47383,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 145,
+          lineNumber: 144,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47392,14 +47391,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 152,
+          lineNumber: 151,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 153,
+          lineNumber: 152,
           columnNumber: 21
         }
       }, "Birthdate (YYYY-MM-DD)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47410,14 +47409,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 154,
+          lineNumber: 153,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 162,
+          lineNumber: 161,
           columnNumber: 17
         }
       }, "Update Your Password:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47425,18 +47424,17 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 163,
+          lineNumber: 162,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 164,
+          lineNumber: 163,
           columnNumber: 21
         }
       }, "New Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
-        minlength: "4",
         type: "password",
         placeholder: "New Password",
         defaultValue: userData.Password,
@@ -47444,7 +47442,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 165,
+          lineNumber: 164,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47452,14 +47450,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 173,
+          lineNumber: 171,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 174,
+          lineNumber: 172,
           columnNumber: 21
         }
       }, "Confirm Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47473,7 +47471,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 175,
+          lineNumber: 173,
           columnNumber: 21
         }
       }))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -47481,21 +47479,21 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 190,
+          lineNumber: 188,
           columnNumber: 13
         }
       }, " Update Account "), /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 191,
+          lineNumber: 189,
           columnNumber: 13
         }
       }, "Favorite Movies:"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 192,
+          lineNumber: 190,
           columnNumber: 13
         }
       }, favorites.map(favmov => {
@@ -47505,7 +47503,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 195,
+              lineNumber: 193,
               columnNumber: 25
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -47513,7 +47511,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 196,
+              lineNumber: 194,
               columnNumber: 29
             }
           }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
@@ -47521,7 +47519,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 197,
+              lineNumber: 195,
               columnNumber: 33
             }
           }, favmov.Title)), /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -47529,7 +47527,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 201,
+              lineNumber: 199,
               columnNumber: 29
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("img", {
@@ -47542,7 +47540,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 202,
+              lineNumber: 200,
               columnNumber: 33
             }
           })))
@@ -47551,7 +47549,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 215,
+          lineNumber: 213,
           columnNumber: 13
         }
       }, "Delete Your Account"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -47560,7 +47558,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 216,
+          lineNumber: 214,
           columnNumber: 13
         }
       }, "Delete Account"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -47572,7 +47570,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 219,
+          lineNumber: 217,
           columnNumber: 13
         }
       }, "Back"))
@@ -47589,9 +47587,9 @@ try {
 }
 
 },{"react":"3b2NM","axios":"7rA65","react-router-dom":"1PMSK","react-bootstrap":"4n7hB","url:../../assets/icons/delete.png":"1ZJOC","./profile-view.scss":"3kYjk","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV"}],"1ZJOC":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "delete.2bbc2902.png"
+module.exports = require('./bundle-url').getBundleURL() + "delete.HASH_REF_628376d7dcdded62c47687dc2bbc2902.png"
 },{"./bundle-url":"5IoJv"}],"3kYjk":[function() {},{}],"69rNu":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "MyFlix.30e470fc.png"
+module.exports = require('./bundle-url').getBundleURL() + "MyFlix.HASH_REF_24e7b743edb82024ad7fbcb530e470fc.png"
 },{"./bundle-url":"5IoJv"}]},["1j6wU","68WUB","1DVjT"], "1DVjT", "parcelRequire0cbe")
 
-//# sourceMappingURL=index.02675e63.js.map
+//# sourceMappingURL=index.HASH_REF_f9eab60bc3a7a7c3f683683702675e63.js.map
