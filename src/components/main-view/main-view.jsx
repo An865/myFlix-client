@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 // #0 import actions
-import { setMovies, setUser } from '../../actions/actions';
+import { setMovies, setUser, setFavorites } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 /*  #1 The rest of components import statements */
 //myFlix components
@@ -65,6 +65,7 @@ class MainView extends React.Component {
             user: authData.user,
         });
         this.props.setUser(authData.user);
+        this.props.setFavorites(authData.user.FavoriteMovies);
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
         this.getMoviesData(authData.token);
@@ -80,7 +81,7 @@ class MainView extends React.Component {
     //render returns visual representation of component
     render() {
         // #5 movies and user are extracted from this.props rather than from the this.state
-        let { movies, user } = this.props;
+        let { movies, user, favorites } = this.props;
 
         return (
             <Router>
@@ -217,6 +218,7 @@ class MainView extends React.Component {
                                 <Col md={8}>
                                     <ProfileView
                                         movies={movies}
+                                        favorites={favorites}
                                         onBackClick={() => history.goBack()}
                                     />
                                 </Col>
@@ -234,8 +236,11 @@ let mapStateToProps = (state) => {
     return {
         movies: state.movies,
         user: state.user,
+        favorites: state.favorites,
     };
 };
 
 /* #8  while exporting we connect mapStateToProps and setMovies with MainView*/
-export default connect(mapStateToProps, { setMovies, setUser })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(
+    MainView
+);

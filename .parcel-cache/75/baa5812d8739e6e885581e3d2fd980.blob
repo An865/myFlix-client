@@ -1,0 +1,44 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _redux = require('redux');
+var _actionsActions = require('../actions/actions');
+function visibilityFilter(state = '', actions) {
+  switch (actions.type) {
+    case _actionsActions.SET_FILTER:
+      return actions.value;
+    default:
+      return state;
+  }
+}
+function movies(state = [], actions) {
+  switch (actions.type) {
+    case _actionsActions.SET_MOVIES:
+      return actions.value;
+    default:
+      return state;
+  }
+}
+function user(state = '', actions) {
+  switch (actions.type) {
+    case _actionsActions.SET_USER:
+      return actions.value;
+    default:
+      return state;
+  }
+}
+function favorites(state = '', actions) {
+  switch (actions.type) {
+    case _actionsActions.SET_FAVORITES:
+      return actions.value;
+    default:
+      return state;
+  }
+}
+/*combined reducer*/
+const moviesApp = _redux.combineReducers({
+  visibilityFilter,
+  movies,
+  user,
+  favorites
+});
+exports.default = moviesApp;

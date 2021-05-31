@@ -8,6 +8,7 @@ import { Button, Form } from 'react-bootstrap';
 //Images and Styling
 import deleteimg from 'url:../../assets/icons/delete.png';
 import './profile-view.scss';
+import { SET_FAVORITES, SET_USER } from '../../actions/actions';
 
 export function ProfileView(props) {
     //passed data
@@ -15,9 +16,10 @@ export function ProfileView(props) {
 
     //Data from Redux Store
     const userData = useSelector((state) => state.user);
-    const favorites = useSelector((state) =>
-        state.movies.filter((m) => userData.FavoriteMovies.includes(m._id))
-    );
+    // const favorites = useSelector((state) =>
+    //     state.movies.filter((m) => userData.FavoriteMovies.includes(m._id))
+    // );
+    const favorites = useSelector((state) => state.favorites);
     const dispatch = useDispatch();
 
     //state
@@ -28,30 +30,30 @@ export function ProfileView(props) {
     const [birthdate, setBirthdate] = useState('');
 
     //validate form
-    // const formValidation = () => {
-    //     let isValid = true;
-    //     if (username.trim().length < 5) {
-    //         window.alert(
-    //             'username must be alphanumeric and contain at least 5 characters'
-    //         );
-    //         isValid = false;
-    //     }
-    //     if (password.trim().length < 3) {
-    //         window.alert(
-    //             'current and new password (minimum 4 characters) required'
-    //         );
-    //         isValid = false;
-    //     }
-    //     if (!(email && email.includes('.') && email.includes('@'))) {
-    //         window.alert('email address is required.');
-    //         isValid = false;
-    //     }
-    //     if (birthdate === '') {
-    //         window.alert('please enter birthdate YYYY-MM-DD');
-    //         isValid = false;
-    //     }
-    //     return isValid;
-    // };
+    const formValidation = () => {
+        let isValid = true;
+        if (username.trim().length < 5) {
+            window.alert(
+                'username must be alphanumeric and contain at least 5 characters'
+            );
+            isValid = false;
+        }
+        if (password.trim().length < 3) {
+            window.alert(
+                'current and new password (minimum 4 characters) required'
+            );
+            isValid = false;
+        }
+        if (!(email && email.includes('.') && email.includes('@'))) {
+            window.alert('email address is required.');
+            isValid = false;
+        }
+        if (birthdate === '') {
+            window.alert('please enter birthdate YYYY-MM-DD');
+            isValid = false;
+        }
+        return isValid;
+    };
 
     //delete user account
     const deleteAccount = (e) => {
@@ -74,7 +76,6 @@ export function ProfileView(props) {
     //delete movie from favorites
     const deleteMovie = (e, movieId) => {
         e.preventDefault();
-        console.log(movieId);
         const deleteMovUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}/${movieId}`;
         const token = localStorage.getItem('token');
 
@@ -83,9 +84,12 @@ export function ProfileView(props) {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                const data = response.data;
-                console.log(response);
-                window.alert('deleted movie');
+                console.log(response.data.FavoriteMovies);
+                dispatch({
+                    type: SET_FAVORITES,
+                    value: response.data.FavoriteMovies,
+                });
+                window.alert('movie deleted');
             })
             .catch((e) => {
                 console.log('error updating user information');
@@ -115,9 +119,7 @@ export function ProfileView(props) {
                     }
                 )
                 .then((response) => {
-                    const data = response.data;
-                    console.log(response);
-                    //update local storage
+                    dispatch({ type: SET_USER, value: response.data });
                     localStorage.setItem('user', username);
                     alert('profile was updated successful');
                 })
