@@ -14,7 +14,6 @@ export class MovieCard extends React.Component {
         const { movie } = this.props;
         const fileName = movie.ImagePath;
         const baseUrl = '../../assets/images/';
-        console.log(baseUrl + fileName);
 
         return (
             <Card border="secondary" bg="light">

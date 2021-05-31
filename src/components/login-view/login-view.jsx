@@ -1,3 +1,4 @@
+/* Packages and Bootstrap Components */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -6,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
+/* Functional Component for Login View  */
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

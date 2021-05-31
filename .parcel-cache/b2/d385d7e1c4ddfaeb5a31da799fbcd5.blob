@@ -1,0 +1,1 @@
+module.exports = require('./bundle-url').getBundleURL() + "MyFlix.HASH_REF_24e7b743edb82024ad7fbcb530e470fc.png"

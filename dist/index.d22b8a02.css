@@ -1,9 +1,6 @@
 .my-flix {
   color: steelblue;
 }
-.card-body {
-  margin: 10px;
-}
 
 
 .left {
@@ -14,5 +11,8 @@
 
 .right {
   text-align: right;
+}
+.card-body {
+  margin: 10px;
 }
 /*# sourceMappingURL=index.d22b8a02.css.map */

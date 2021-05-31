@@ -1,14 +1,23 @@
 //Packages
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
 //Bootstrap components
 import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
+// #0
+import { setMovies } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
+
+/* 
+  #1 The rest of components import statements
+*/
 //myFlix components
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -18,17 +27,15 @@ import './main-view.scss';
 //Images
 import logo from 'url:../../assets/images/MyFlix.png';
 
+// #2 export keyword removed from here
 class MainView extends React.Component {
     //constructor is responsible for initializing this.state and creating component
     constructor() {
         super();
         //initialize state with movies array
+        // #3 movies state removed from here
         this.state = {
-            movies: [],
-            selectedMovie: null,
-            userData: null,
             user: null,
-            registration: false,
         };
     }
 
@@ -51,21 +58,12 @@ class MainView extends React.Component {
             })
             .then((response) => {
                 // Assign the result to the state
-                this.setState({
-                    movies: response.data,
-                });
+                // #4
+                this.props.setMovies(response.data);
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-    /*When a movie is clicked, this function is invoked and updates the 
-  state of the `selectedMovie` *property to that movie*/
-    setSelectedMovie(movie) {
-        this.setState({
-            selectedMovie: movie,
-        });
     }
 
     /* When a user successfully logs in, this function updates the `user` 
@@ -92,8 +90,9 @@ class MainView extends React.Component {
 
     //render returns visual representation of component
     render() {
-        const { movies, selectedMovie, userData, user, registration } =
-            this.state;
+        // #5 movies is extracted from this.props rather than from the this.state
+        let { movies } = this.props;
+        let { user } = this.state;
 
         return (
             <Router>
@@ -143,11 +142,10 @@ class MainView extends React.Component {
                                         />
                                     </Col>
                                 );
-                            return movies.map((m) => (
-                                <Col md={3} key={m._id}>
-                                    <MovieCard movie={m} key={m._id} />
-                                </Col>
-                            ));
+                            if (movies.length === 0)
+                                return <div className="main-view" />;
+                            // #6
+                            return <MoviesList movies={movies} />;
                         }}
                     />
 
@@ -244,4 +242,10 @@ class MainView extends React.Component {
     }
 }
 
-export default MainView;
+/* #7 recieves redux state and uses it as props in component */
+let mapStateToProps = (state) => {
+    return { movies: state.movies };
+};
+
+/* #8  while exporting we connect mapStateToProps and setMovies with MainView*/
+export default connect(mapStateToProps, { setMovies })(MainView);
