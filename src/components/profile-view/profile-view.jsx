@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 // Bootstrap Components
 import { Button, Form } from 'react-bootstrap';
 //Images and Styling
@@ -10,13 +11,14 @@ import './profile-view.scss';
 
 export function ProfileView(props) {
     //passed data
-    const { movies, userData, onBackClick } = props;
+    const { movies, onBackClick } = props;
 
-    //favorite movies
-    let arrayOfFavorites = userData.FavoriteMovies;
-    let favorites = movies.filter((movie) =>
-        arrayOfFavorites.includes(movie._id)
+    //Data from Redux Store
+    const userData = useSelector((state) => state.user);
+    const favorites = useSelector((state) =>
+        state.movies.filter((m) => userData.FavoriteMovies.includes(m._id))
     );
+    const dispatch = useDispatch();
 
     //state
     const [username, setUsername] = useState('');
@@ -26,30 +28,30 @@ export function ProfileView(props) {
     const [birthdate, setBirthdate] = useState('');
 
     //validate form
-    const formValidation = () => {
-        let isValid = true;
-        if (username.trim().length < 5) {
-            window.alert(
-                'username must be alphanumeric and contain at least 5 characters'
-            );
-            isValid = false;
-        }
-        if (password.trim().length < 3) {
-            window.alert(
-                'current and new password (minimum 4 characters) required'
-            );
-            isValid = false;
-        }
-        if (!(email && email.includes('.') && email.includes('@'))) {
-            window.alert('email address is required.');
-            isValid = false;
-        }
-        if (birthdate === '') {
-            window.alert('please enter birthdate YYYY-MM-DD');
-            isValid = false;
-        }
-        return isValid;
-    };
+    // const formValidation = () => {
+    //     let isValid = true;
+    //     if (username.trim().length < 5) {
+    //         window.alert(
+    //             'username must be alphanumeric and contain at least 5 characters'
+    //         );
+    //         isValid = false;
+    //     }
+    //     if (password.trim().length < 3) {
+    //         window.alert(
+    //             'current and new password (minimum 4 characters) required'
+    //         );
+    //         isValid = false;
+    //     }
+    //     if (!(email && email.includes('.') && email.includes('@'))) {
+    //         window.alert('email address is required.');
+    //         isValid = false;
+    //     }
+    //     if (birthdate === '') {
+    //         window.alert('please enter birthdate YYYY-MM-DD');
+    //         isValid = false;
+    //     }
+    //     return isValid;
+    // };
 
     //delete user account
     const deleteAccount = (e) => {

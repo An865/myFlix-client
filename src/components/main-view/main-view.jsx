@@ -2,19 +2,14 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 //Bootstrap components
 import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
-// #0
-import { setMovies } from '../../actions/actions';
-
+// #0 import actions
+import { setMovies, setUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
-
-/* 
-  #1 The rest of components import statements
-*/
+/*  #1 The rest of components import statements */
 //myFlix components
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -39,19 +34,8 @@ class MainView extends React.Component {
         };
     }
 
-    //store user and token in local storage and get movies with access token
-    componentDidMount() {
-        let accessToken = localStorage.getItem('token');
-        if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user'),
-            });
-            this.getMovies(accessToken);
-        }
-    }
-
-    //get movie data
-    getMovies(token) {
+    //Get Movie Data from API
+    getMoviesData(token) {
         axios
             .get('https://spiremyflix.herokuapp.com/movies', {
                 headers: { Authorization: `Bearer ${token}` },
@@ -66,33 +50,37 @@ class MainView extends React.Component {
             });
     }
 
+    //store user and token in local storage and get movies with access token
+    componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.getMoviesData(accessToken);
+        }
+    }
+
     /* When a user successfully logs in, this function updates the `user` 
   property in state to that *particular user*/
     onLoggedIn(authData) {
         this.setState({
-            userData: authData.user,
-            user: authData.user.Username,
+            user: authData.user,
         });
+        this.props.setUser(authData.user);
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
-        this.getMovies(authData.token);
+        this.getMoviesData(authData.token);
     }
 
     /* Log out user when the press logout button */
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.setState({
-            userData: null,
-            user: null,
-        });
+        this.props.setUser(null);
     }
 
     //render returns visual representation of component
     render() {
-        // #5 movies is extracted from this.props rather than from the this.state
-        let { movies } = this.props;
-        let { user } = this.state;
+        // #5 movies and user are extracted from this.props rather than from the this.state
+        let { movies, user } = this.props;
 
         return (
             <Router>
@@ -229,7 +217,6 @@ class MainView extends React.Component {
                                 <Col md={8}>
                                     <ProfileView
                                         movies={movies}
-                                        userData={userData}
                                         onBackClick={() => history.goBack()}
                                     />
                                 </Col>
@@ -244,8 +231,11 @@ class MainView extends React.Component {
 
 /* #7 recieves redux state and uses it as props in component */
 let mapStateToProps = (state) => {
-    return { movies: state.movies };
+    return {
+        movies: state.movies,
+        user: state.user,
+    };
 };
 
 /* #8  while exporting we connect mapStateToProps and setMovies with MainView*/
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
