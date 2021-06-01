@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 // Bootstrap Components
 import { Button, Form } from 'react-bootstrap';
 //Images and Styling
@@ -16,10 +17,9 @@ export function ProfileView(props) {
 
     //Data from Redux Store
     const userData = useSelector((state) => state.user);
-    // const favorites = useSelector((state) =>
-    //     state.movies.filter((m) => userData.FavoriteMovies.includes(m._id))
-    // );
-    const favorites = useSelector((state) => state.favorites);
+    const favorites = useSelector((state) =>
+        state.movies.filter((m) => userData.FavoriteMovies.includes(m._id))
+    );
     const dispatch = useDispatch();
 
     //state
@@ -84,7 +84,7 @@ export function ProfileView(props) {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                console.log(response.data.FavoriteMovies);
+                //console.log(response.data.FavoriteMovies);
                 dispatch({
                     type: SET_FAVORITES,
                     value: response.data.FavoriteMovies,
@@ -92,9 +92,15 @@ export function ProfileView(props) {
                 window.alert('movie deleted');
             })
             .catch((e) => {
-                console.log('error updating user information');
+                console.log(`error updating user information: ${e}`);
             });
     };
+
+    // const updatedFavorites = useSelector((state) =>
+    //     state.movies.filter((m) =>
+    //         response.data.FavoriteMovie.includes(m._id)
+    //     )
+    // );
 
     //update user info with axios put request
     const updateInfo = (e) => {

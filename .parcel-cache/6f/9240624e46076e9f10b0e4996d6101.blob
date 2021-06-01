@@ -31417,7 +31417,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 module.exports = hoistNonReactStatics;
 
 },{"react-is":"68QIU"}],"4iZ2Z":[function() {},{}],"7HYOq":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "like.d9df5ab3.png"
+module.exports = require('./bundle-url').getBundleURL() + "like.HASH_REF_a52445aa658013d30e96ef4bd9df5ab3.png"
 },{"./bundle-url":"5IoJv"}],"5IoJv":[function(require,module,exports) {
 "use strict";
 
@@ -46973,7 +46973,7 @@ try {
         });
         window.alert('movie deleted');
       }).catch(e => {
-        console.log(`error updating user information: ${e}`);
+        console.log('test');
       });
     };
     // const updatedFavorites = useSelector((state) =>
@@ -47006,7 +47006,7 @@ try {
           localStorage.setItem('user', username);
           alert('profile was updated successful');
         }).catch(e => {
-          console.log('error updating user information');
+          console.log('test');
         });
       }
     };
@@ -47296,7 +47296,7 @@ try {
 }
 
 },{"react":"3b2NM","react-bootstrap":"4n7hB","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","axios":"7rA65","react-router-dom":"1PMSK","url:../../assets/icons/delete.png":"1ZJOC","./profile-view.scss":"3kYjk","react-redux":"7GDa4","../../actions/actions":"5S6cN"}],"1ZJOC":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "delete.2bbc2902.png"
+module.exports = require('./bundle-url').getBundleURL() + "delete.HASH_REF_628376d7dcdded62c47687dc2bbc2902.png"
 },{"./bundle-url":"5IoJv"}],"3kYjk":[function() {},{}],"7GDa4":[function(require,module,exports) {
 "use strict";
 
@@ -48975,7 +48975,7 @@ LinkContainer.defaultProps = {
 };
 exports.default = (0, _reactRouterDom.withRouter)(LinkContainer);
 },{"react":"3b2NM","prop-types":"4dfy5","react-router-dom":"1PMSK"}],"69rNu":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "MyFlix.30e470fc.png"
+module.exports = require('./bundle-url').getBundleURL() + "MyFlix.HASH_REF_24e7b743edb82024ad7fbcb530e470fc.png"
 },{"./bundle-url":"5IoJv"}],"3Biek":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
@@ -49172,7 +49172,7 @@ try {
 }
 
 },{"react":"3b2NM","prop-types":"4dfy5","react-router-dom":"1PMSK","react-bootstrap/Button":"1ru0l","react-bootstrap/Card":"1CZWQ","./movie-card.scss":"43n4t","url:../../assets/images/tokillamockingbird.jpg":"5xk4i","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV"}],"43n4t":[function() {},{}],"5xk4i":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "tokillamockingbird.1ff2f049.jpg"
+module.exports = require('./bundle-url').getBundleURL() + "tokillamockingbird.HASH_REF_4b26b32a9c032cd962ca85f61ff2f049.jpg"
 },{"./bundle-url":"5IoJv"}],"3SRLP":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
@@ -49946,4 +49946,4 @@ exports.devToolsEnhancer =
 
 },{"redux":"7panR"}]},["1j6wU","68WUB","1DVjT"], "1DVjT", "parcelRequire0cbe")
 
-//# sourceMappingURL=index.02675e63.js.map
+//# sourceMappingURL=index.HASH_REF_f9eab60bc3a7a7c3f683683702675e63.js.map
