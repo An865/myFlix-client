@@ -84,23 +84,23 @@ export function ProfileView(props) {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                //console.log(response.data.FavoriteMovies);
+                // const updatedFavorites = useSelector((state) =>
+                //     state.movies.filter((m) =>
+                //         response.data.FavoriteMovie.includes(m._id)
+                //     )
+                // );
+                console.log(response.data.FavoriteMovies);
                 dispatch({
                     type: SET_FAVORITES,
                     value: response.data.FavoriteMovies,
                 });
+                dispatch({ type: SET_USER, value: response.data });
                 window.alert('movie deleted');
             })
             .catch((e) => {
                 console.log(`error updating user information: ${e}`);
             });
     };
-
-    // const updatedFavorites = useSelector((state) =>
-    //     state.movies.filter((m) =>
-    //         response.data.FavoriteMovie.includes(m._id)
-    //     )
-    // );
 
     //update user info with axios put request
     const updateInfo = (e) => {
