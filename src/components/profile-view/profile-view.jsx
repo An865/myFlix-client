@@ -84,12 +84,7 @@ export function ProfileView(props) {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                // const updatedFavorites = useSelector((state) =>
-                //     state.movies.filter((m) =>
-                //         response.data.FavoriteMovie.includes(m._id)
-                //     )
-                // );
-                console.log(response.data.FavoriteMovies);
+                // console.log(response.data.FavoriteMovies);
                 dispatch({
                     type: SET_FAVORITES,
                     value: response.data.FavoriteMovies,
@@ -143,7 +138,7 @@ export function ProfileView(props) {
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
-                        minlength="4"
+                        minLength="4"
                         type="text"
                         placeholder={userData.Username}
                         defaultValue={userData.Username}
@@ -173,7 +168,7 @@ export function ProfileView(props) {
                 <Form.Group controlId="formNewPassword">
                     <Form.Label>New Password</Form.Label>
                     <Form.Control
-                        minlength="4"
+                        minLength="4"
                         type="password"
                         placeholder="New Password"
                         defaultValue={userData.Password}

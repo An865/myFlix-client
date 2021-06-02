@@ -1,0 +1,410 @@
+var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "ProfileView", function () {
+    return ProfileView;
+  });
+  var _react = require('react');
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _axios = require('axios');
+  var _axiosDefault = _parcelHelpers.interopDefault(_axios);
+  var _reactRouterDom = require('react-router-dom');
+  var _reactRedux = require('react-redux');
+  var _reactBootstrap = require('react-bootstrap');
+  var _urlAssetsIconsDeletePng = require('url:../../assets/icons/delete.png');
+  var _urlAssetsIconsDeletePngDefault = _parcelHelpers.interopDefault(_urlAssetsIconsDeletePng);
+  require('./profile-view.scss');
+  var _actionsActions = require('../../actions/actions');
+  var _jsxFileName = "/Users/annespire/Desktop/Dev/CF/Full-Stack_Immersion/Achievement3/myFlix-client/src/components/profile-view/profile-view.jsx", _s = $RefreshSig$();
+  function ProfileView(props) {
+    _s();
+    // passed data
+    const {movies, onBackClick} = props;
+    // Data from Redux Store
+    const userData = _reactRedux.useSelector(state => state.user);
+    const favorites = _reactRedux.useSelector(state => state.movies.filter(m => userData.FavoriteMovies.includes(m._id)));
+    const dispatch = _reactRedux.useDispatch();
+    // state
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const [confirmPassword, setConfirmPassword] = _react.useState('');
+    const [email, setEmail] = _react.useState('');
+    const [birthdate, setBirthdate] = _react.useState('');
+    // validate form
+    const formValidation = () => {
+      let isValid = true;
+      if (username.trim().length < 5) {
+        window.alert('username must be alphanumeric and contain at least 5 characters');
+        isValid = false;
+      }
+      if (password.trim().length < 3) {
+        window.alert('current and new password (minimum 4 characters) required');
+        isValid = false;
+      }
+      if (!(email && email.includes('.') && email.includes('@'))) {
+        window.alert('email address is required.');
+        isValid = false;
+      }
+      if (birthdate === '') {
+        window.alert('please enter birthdate YYYY-MM-DD');
+        isValid = false;
+      }
+      return isValid;
+    };
+    // delete user account
+    const deleteAccount = e => {
+      e.preventDefault();
+      const token = localStorage.getItem('token');
+      const deleteUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}`;
+      _axiosDefault.default.delete(deleteUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(response => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.alert('account deleted');
+        window.open('/', '_self');
+      }).catch(error => console.error(error));
+    };
+    // delete movie from favorites
+    const deleteMovie = (e, movieId) => {
+      e.preventDefault();
+      const deleteMovUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}/${movieId}`;
+      const token = localStorage.getItem('token');
+      _axiosDefault.default.delete(deleteMovUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(response => {
+        // console.log(response.data.FavoriteMovies);
+        dispatch({
+          type: _actionsActions.SET_FAVORITES,
+          value: response.data.FavoriteMovies
+        });
+        dispatch({
+          type: _actionsActions.SET_USER,
+          value: response.data
+        });
+        window.alert('movie deleted');
+      }).catch(e => {
+        console.log(`error updating user information: ${e}`);
+      });
+    };
+    // update user info with axios put request
+    const updateInfo = e => {
+      e.preventDefault();
+      // token and form data JSON object to be passed in put request
+      const token = localStorage.getItem('token');
+      const updateUrl = `https://spiremyflix.herokuapp.com/users/${userData.Username}`;
+      let isValid = formValidation();
+      if (isValid) {
+        _axiosDefault.default.put(updateUrl, {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birth: birthdate
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }).then(response => {
+          dispatch({
+            type: _actionsActions.SET_USER,
+            value: response.data
+          });
+          localStorage.setItem('user', username);
+          alert('profile was updated successful');
+        }).catch(e => {
+          console.log('error updating user information');
+        });
+      }
+    };
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 134,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h1", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 135,
+          columnNumber: 13
+        }
+      }, "Welcome ", userData.Username, "!"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form, {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 136,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 137,
+          columnNumber: 17
+        }
+      }, "Update Your Information:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formUsername",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 138,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 139,
+          columnNumber: 21
+        }
+      }, "Username"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        minLength: "4",
+        type: "text",
+        placeholder: userData.Username,
+        defaultValue: userData.Username,
+        onChange: e => setUsername(e.target.value),
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 140,
+          columnNumber: 21
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formEmail",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 148,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 149,
+          columnNumber: 21
+        }
+      }, "Email"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "text",
+        placeholder: userData.Email,
+        defaultValue: userData.Email,
+        onChange: e => setEmail(e.target.value),
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 150,
+          columnNumber: 21
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formBirthdate",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 157,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 158,
+          columnNumber: 21
+        }
+      }, "Birthdate (YYYY-MM-DD)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "text",
+        placeholder: userData.Birth,
+        defaultValue: userData.Birth,
+        onChange: e => setBirthdate(e.target.value),
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 159,
+          columnNumber: 21
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 167,
+          columnNumber: 17
+        }
+      }, "Update Your Password:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formNewPassword",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 168,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 169,
+          columnNumber: 21
+        }
+      }, "New Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        minLength: "4",
+        type: "password",
+        placeholder: "New Password",
+        defaultValue: userData.Password,
+        onChange: e => setPassword(e.target.value),
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 170,
+          columnNumber: 21
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "formConfirmPassword",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 178,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 179,
+          columnNumber: 21
+        }
+      }, "Confirm Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
+        type: "password",
+        placeholder: "Confirm Password",
+        defaultValue: userData.Password,
+        onChange: e => {
+          setConfirmPassword(e.target.value);
+          confirmPassword !== password ? e.target.setCustomValidity('passwords must match') : e.target.setCustomValidity('');
+        },
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 180,
+          columnNumber: 21
+        }
+      }))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
+        onClick: updateInfo,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 195,
+          columnNumber: 13
+        }
+      }, " Update Account "), /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 196,
+          columnNumber: 13
+        }
+      }, "Favorite Movies:"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 197,
+          columnNumber: 13
+        }
+      }, favorites.map(favmov => {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("li", {
+            key: favmov._id,
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 200,
+              columnNumber: 25
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("span", {
+            className: "left",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 201,
+              columnNumber: 29
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
+            to: `/movies/${favmov._id}`,
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 202,
+              columnNumber: 33
+            }
+          }, favmov.Title)), /*#__PURE__*/_reactDefault.default.createElement("span", {
+            className: "right",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 206,
+              columnNumber: 29
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("img", {
+            className: "left",
+            src: _urlAssetsIconsDeletePngDefault.default,
+            alt: "delete movie",
+            onClick: e => {
+              deleteMovie(e, favmov._id);
+            },
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 207,
+              columnNumber: 33
+            }
+          })))
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 220,
+          columnNumber: 13
+        }
+      }, "Delete Your Account"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
+        variant: "danger",
+        onClick: deleteAccount,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 221,
+          columnNumber: 13
+        }
+      }, "Delete Account"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
+        variant: "primary",
+        type: "submit",
+        onClick: () => {
+          onBackClick(null);
+        },
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 224,
+          columnNumber: 13
+        }
+      }, "Back"))
+    );
+  }
+  _s(ProfileView, "9r8HDid4VGKWKE1LSR8HfBdGD2Q=", false, function () {
+    return [_reactRedux.useSelector, _reactRedux.useSelector, _reactRedux.useDispatch];
+  });
+  _c = ProfileView;
+  var _c;
+  $RefreshReg$(_c, "ProfileView");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

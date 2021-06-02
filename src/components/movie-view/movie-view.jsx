@@ -3,34 +3,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { useDispatch } from 'react-redux';
 //Styling
 import './movie-view.scss';
 import likeimg from 'url:../../assets/icons/like.png';
 import axios from 'axios';
+import { SET_FAVORITES, SET_USER } from '../../actions/actions';
 
-export class MovieView extends React.Component {
-    addMovie(e, user, movieId) {
+export function MovieView(props) {
+    const { user, movie, onBackClick } = props;
+    const dispatch = useDispatch();
+    const addMovie = (e, user, movieId) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
-        const addUrl = `https://spiremyflix.herokuapp.com/users/${user}/movies/${movieId}`;
-
+        const addUrl = `https://spiremyflix.herokuapp.com/users/${user.Username}/movies/${movieId}`;
         axios
-            .put(addUrl, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            .put(
+                addUrl,
+                {},
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            )
             .then((response) => {
                 const data = response.data;
-                console.log(data);
+                dispatch({
+                    type: SET_FAVORITES,
+                    value: response.data.FavoriteMovies,
+                });
+                dispatch({ type: SET_USER, value: response.data });
                 alert('movie was updated successful');
             })
             .catch((e) => {
                 console.log(e);
             });
-    }
+    };
 
-    render() {
-        const { user, movie, onBackClick } = this.props;
-        return (
+    return (
+        <div>
             <div className="movie-view">
                 <div className="movie-poster">
                     {/* <img src={`/${movie.ImagePath}`} /> */}
@@ -53,7 +63,7 @@ export class MovieView extends React.Component {
                 <img
                     src={likeimg}
                     onClick={(e) => {
-                        this.addMovie(e, user, movie._id);
+                        addMovie(e, user, movie._id);
                     }}
                 />
                 <Button
@@ -66,8 +76,8 @@ export class MovieView extends React.Component {
                     Back
                 </Button>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 //establish property types

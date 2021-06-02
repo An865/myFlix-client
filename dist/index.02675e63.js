@@ -26934,163 +26934,183 @@ try {
   var _reactRouterDom = require('react-router-dom');
   var _reactBootstrapButton = require('react-bootstrap/Button');
   var _reactBootstrapButtonDefault = _parcelHelpers.interopDefault(_reactBootstrapButton);
+  var _reactRedux = require('react-redux');
   require('./movie-view.scss');
   var _urlAssetsIconsLikePng = require('url:../../assets/icons/like.png');
   var _urlAssetsIconsLikePngDefault = _parcelHelpers.interopDefault(_urlAssetsIconsLikePng);
   var _axios = require('axios');
   var _axiosDefault = _parcelHelpers.interopDefault(_axios);
-  var _jsxFileName = "/Users/annespire/Desktop/Dev/CF/Full-Stack_Immersion/Achievement3/myFlix-client/src/components/movie-view/movie-view.jsx";
-  class MovieView extends _reactDefault.default.Component {
-    addMovie(e, user, movieId) {
+  var _actionsActions = require('../../actions/actions');
+  var _jsxFileName = "/Users/annespire/Desktop/Dev/CF/Full-Stack_Immersion/Achievement3/myFlix-client/src/components/movie-view/movie-view.jsx", _s = $RefreshSig$();
+  function MovieView(props) {
+    _s();
+    const {user, movie, onBackClick} = props;
+    const dispatch = _reactRedux.useDispatch();
+    const addMovie = (e, user, movieId) => {
       e.preventDefault();
       const token = localStorage.getItem('token');
-      const addUrl = `https://spiremyflix.herokuapp.com/users/${user}/movies/${movieId}`;
-      _axiosDefault.default.put(addUrl, {
+      const addUrl = `https://spiremyflix.herokuapp.com/users/${user.Username}/movies/${movieId}`;
+      _axiosDefault.default.put(addUrl, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       }).then(response => {
         const data = response.data;
-        console.log(data);
+        dispatch({
+          type: _actionsActions.SET_FAVORITES,
+          value: response.data.FavoriteMovies
+        });
+        dispatch({
+          type: _actionsActions.SET_USER,
+          value: response.data
+        });
         alert('movie was updated successful');
       }).catch(e => {
         console.log(e);
       });
-    }
-    render() {
-      const {user, movie, onBackClick} = this.props;
-      return (
-        /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "movie-view",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 34,
-            columnNumber: 13
-          }
-        }, /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "movie-poster",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 35,
-            columnNumber: 17
-          }
-        }, /*#__PURE__*/_reactDefault.default.createElement("img", {
-          src: "path",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 37,
-            columnNumber: 21
-          }
-        })), /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "movie-title",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 39,
-            columnNumber: 17
-          }
-        }, /*#__PURE__*/_reactDefault.default.createElement("span", {
-          className: "label",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 40,
-            columnNumber: 21
-          }
-        }, "Title: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
-          className: "value",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 41,
-            columnNumber: 21
-          }
-        }, movie.Title)), /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "movie-description",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 43,
-            columnNumber: 17
-          }
-        }, /*#__PURE__*/_reactDefault.default.createElement("span", {
-          className: "label",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 44,
-            columnNumber: 21
-          }
-        }, "Description: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
-          className: "value",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 45,
-            columnNumber: 21
-          }
-        }, movie.Description)), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
-          to: `/directors/${movie.Director.Name}`,
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 47,
-            columnNumber: 17
-          }
-        }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
-          variant: "link",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 48,
-            columnNumber: 21
-          }
-        }, "Director")), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
-          to: `/genres/${movie.Genre.Name}`,
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 50,
-            columnNumber: 17
-          }
-        }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
-          variant: "link",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 51,
-            columnNumber: 21
-          }
-        }, "Genre")), /*#__PURE__*/_reactDefault.default.createElement("img", {
-          src: _urlAssetsIconsLikePngDefault.default,
-          onClick: e => {
-            this.addMovie(e, user, movie._id);
-          },
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 53,
-            columnNumber: 17
-          }
-        }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
-          variant: "primary",
-          type: "submit",
-          onClick: () => {
-            onBackClick(null);
-          },
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 59,
-            columnNumber: 17
-          }
-        }, "Back"))
-      );
-    }
+    };
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 43,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("div", {
+        className: "movie-view",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 44,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("div", {
+        className: "movie-poster",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 45,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("img", {
+        src: "path",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 47,
+          columnNumber: 21
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        className: "movie-title",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("span", {
+        className: "label",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 50,
+          columnNumber: 21
+        }
+      }, "Title: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
+        className: "value",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 51,
+          columnNumber: 21
+        }
+      }, movie.Title)), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        className: "movie-description",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 53,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("span", {
+        className: "label",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 54,
+          columnNumber: 21
+        }
+      }, "Description: "), /*#__PURE__*/_reactDefault.default.createElement("span", {
+        className: "value",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55,
+          columnNumber: 21
+        }
+      }, movie.Description)), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
+        to: `/directors/${movie.Director.Name}`,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 57,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
+        variant: "link",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 58,
+          columnNumber: 21
+        }
+      }, "Director")), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
+        to: `/genres/${movie.Genre.Name}`,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 60,
+          columnNumber: 17
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
+        variant: "link",
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 61,
+          columnNumber: 21
+        }
+      }, "Genre")), /*#__PURE__*/_reactDefault.default.createElement("img", {
+        src: _urlAssetsIconsLikePngDefault.default,
+        onClick: e => {
+          addMovie(e, user, movie._id);
+        },
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 63,
+          columnNumber: 17
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
+        variant: "primary",
+        type: "submit",
+        onClick: () => {
+          onBackClick(null);
+        },
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 69,
+          columnNumber: 17
+        }
+      }, "Back")))
+    );
   }
+  _s(MovieView, "rgTLoBID190wEKCp9+G8W6F7A5M=", false, function () {
+    return [_reactRedux.useDispatch];
+  });
+  _c = MovieView;
   // establish property types
   MovieView.propTypes = {
     movie: _propTypesDefault.default.shape({
@@ -27110,13 +27130,15 @@ try {
     }).isRequired,
     onBackClick: _propTypesDefault.default.func.isRequired
   };
+  var _c;
+  $RefreshReg$(_c, "MovieView");
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","prop-types":"4dfy5","react-bootstrap/Button":"1ru0l","react-router-dom":"1PMSK","./movie-view.scss":"4iZ2Z","url:../../assets/icons/like.png":"7HYOq","axios":"7rA65"}],"4dfy5":[function(require,module,exports) {
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","prop-types":"4dfy5","react-bootstrap/Button":"1ru0l","react-router-dom":"1PMSK","./movie-view.scss":"4iZ2Z","url:../../assets/icons/like.png":"7HYOq","axios":"7rA65","react-redux":"7GDa4","../../actions/actions":"5S6cN"}],"4dfy5":[function(require,module,exports) {
 /**
 * Copyright (c) 2013-present, Facebook, Inc.
 *
@@ -33209,7 +33231,1542 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],"6M7fu":[function(require,module,exports) {
+},{}],"7GDa4":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+
+var _Provider = _interopRequireDefault(require("./components/Provider"));
+
+exports.Provider = _Provider["default"];
+
+var _connectAdvanced = _interopRequireDefault(require("./components/connectAdvanced"));
+
+exports.connectAdvanced = _connectAdvanced["default"];
+
+var _Context = require("./components/Context");
+
+exports.ReactReduxContext = _Context.ReactReduxContext;
+
+var _connect = _interopRequireDefault(require("./connect/connect"));
+
+exports.connect = _connect["default"];
+
+var _useDispatch = require("./hooks/useDispatch");
+
+exports.useDispatch = _useDispatch.useDispatch;
+exports.createDispatchHook = _useDispatch.createDispatchHook;
+
+var _useSelector = require("./hooks/useSelector");
+
+exports.useSelector = _useSelector.useSelector;
+exports.createSelectorHook = _useSelector.createSelectorHook;
+
+var _useStore = require("./hooks/useStore");
+
+exports.useStore = _useStore.useStore;
+exports.createStoreHook = _useStore.createStoreHook;
+
+var _batch = require("./utils/batch");
+
+var _reactBatchedUpdates = require("./utils/reactBatchedUpdates");
+
+exports.batch = _reactBatchedUpdates.unstable_batchedUpdates;
+
+var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
+
+exports.shallowEqual = _shallowEqual["default"];
+(0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","./components/Provider":"3bhyH","./components/connectAdvanced":"SPrTN","./components/Context":"6ScOK","./connect/connect":"1HacB","./hooks/useDispatch":"4H7HK","./hooks/useSelector":"6dv0a","./hooks/useStore":"5zPKn","./utils/batch":"XOS5r","./utils/reactBatchedUpdates":"12gEH","./utils/shallowEqual":"1BbL9"}],"3bhyH":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+exports.__esModule = true;
+exports["default"] = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _Context = require("./Context");
+var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
+var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
+function Provider(_ref) {
+  var store = _ref.store, context = _ref.context, children = _ref.children;
+  var contextValue = (0, _react.useMemo)(function () {
+    var subscription = new _Subscription["default"](store);
+    subscription.onStateChange = subscription.notifyNestedSubs;
+    return {
+      store: store,
+      subscription: subscription
+    };
+  }, [store]);
+  var previousState = (0, _react.useMemo)(function () {
+    return store.getState();
+  }, [store]);
+  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
+    var subscription = contextValue.subscription;
+    subscription.trySubscribe();
+    if (previousState !== store.getState()) {
+      subscription.notifyNestedSubs();
+    }
+    return function () {
+      subscription.tryUnsubscribe();
+      subscription.onStateChange = null;
+    };
+  }, [contextValue, previousState]);
+  var Context = context || _Context.ReactReduxContext;
+  return (
+    /*#__PURE__*/_react["default"].createElement(Context.Provider, {
+      value: contextValue
+    }, children)
+  );
+}
+if ("development" !== 'production') {
+  Provider.propTypes = {
+    store: _propTypes["default"].shape({
+      subscribe: _propTypes["default"].func.isRequired,
+      dispatch: _propTypes["default"].func.isRequired,
+      getState: _propTypes["default"].func.isRequired
+    }),
+    context: _propTypes["default"].object,
+    children: _propTypes["default"].any
+  };
+}
+var _default = Provider;
+exports["default"] = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/interopRequireWildcard":"28En5","react":"3b2NM","prop-types":"4dfy5","./Context":"6ScOK","../utils/Subscription":"Y1J0m","../utils/useIsomorphicLayoutEffect":"64Bcp"}],"28En5":[function(require,module,exports) {
+var _typeof = require("@babel/runtime/helpers/typeof")["default"];
+
+function _getRequireWildcardCache(nodeInterop) {
+  if (typeof WeakMap !== "function") return null;
+  var cacheBabelInterop = new WeakMap();
+  var cacheNodeInterop = new WeakMap();
+  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
+    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+  })(nodeInterop);
+}
+
+function _interopRequireWildcard(obj, nodeInterop) {
+  if (!nodeInterop && obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
+    return {
+      "default": obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache(nodeInterop);
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj["default"] = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+module.exports = _interopRequireWildcard;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{"@babel/runtime/helpers/typeof":"3F8fn"}],"3F8fn":[function(require,module,exports) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"6ScOK":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports["default"] = exports.ReactReduxContext = void 0;
+var _react = _interopRequireDefault(require("react"));
+var ReactReduxContext = /*#__PURE__*/_react["default"].createContext(null);
+exports.ReactReduxContext = ReactReduxContext;
+if ("development" !== 'production') {
+  ReactReduxContext.displayName = 'ReactRedux';
+}
+var _default = ReactReduxContext;
+exports["default"] = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","react":"3b2NM"}],"Y1J0m":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports["default"] = void 0;
+
+var _batch = require("./batch");
+
+// encapsulates the subscription logic for connecting a component to the redux store, as
+// well as nesting subscriptions of descendant components, so that we can ensure the
+// ancestor components re-render before descendants
+var nullListeners = {
+  notify: function notify() {}
+};
+
+function createListenerCollection() {
+  var batch = (0, _batch.getBatch)();
+  var first = null;
+  var last = null;
+  return {
+    clear: function clear() {
+      first = null;
+      last = null;
+    },
+    notify: function notify() {
+      batch(function () {
+        var listener = first;
+
+        while (listener) {
+          listener.callback();
+          listener = listener.next;
+        }
+      });
+    },
+    get: function get() {
+      var listeners = [];
+      var listener = first;
+
+      while (listener) {
+        listeners.push(listener);
+        listener = listener.next;
+      }
+
+      return listeners;
+    },
+    subscribe: function subscribe(callback) {
+      var isSubscribed = true;
+      var listener = last = {
+        callback: callback,
+        next: null,
+        prev: last
+      };
+
+      if (listener.prev) {
+        listener.prev.next = listener;
+      } else {
+        first = listener;
+      }
+
+      return function unsubscribe() {
+        if (!isSubscribed || first === null) return;
+        isSubscribed = false;
+
+        if (listener.next) {
+          listener.next.prev = listener.prev;
+        } else {
+          last = listener.prev;
+        }
+
+        if (listener.prev) {
+          listener.prev.next = listener.next;
+        } else {
+          first = listener.next;
+        }
+      };
+    }
+  };
+}
+
+var Subscription = /*#__PURE__*/function () {
+  function Subscription(store, parentSub) {
+    this.store = store;
+    this.parentSub = parentSub;
+    this.unsubscribe = null;
+    this.listeners = nullListeners;
+    this.handleChangeWrapper = this.handleChangeWrapper.bind(this);
+  }
+
+  var _proto = Subscription.prototype;
+
+  _proto.addNestedSub = function addNestedSub(listener) {
+    this.trySubscribe();
+    return this.listeners.subscribe(listener);
+  };
+
+  _proto.notifyNestedSubs = function notifyNestedSubs() {
+    this.listeners.notify();
+  };
+
+  _proto.handleChangeWrapper = function handleChangeWrapper() {
+    if (this.onStateChange) {
+      this.onStateChange();
+    }
+  };
+
+  _proto.isSubscribed = function isSubscribed() {
+    return Boolean(this.unsubscribe);
+  };
+
+  _proto.trySubscribe = function trySubscribe() {
+    if (!this.unsubscribe) {
+      this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.handleChangeWrapper) : this.store.subscribe(this.handleChangeWrapper);
+      this.listeners = createListenerCollection();
+    }
+  };
+
+  _proto.tryUnsubscribe = function tryUnsubscribe() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+      this.unsubscribe = null;
+      this.listeners.clear();
+      this.listeners = nullListeners;
+    }
+  };
+
+  return Subscription;
+}();
+
+exports["default"] = Subscription;
+},{"./batch":"XOS5r"}],"XOS5r":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.getBatch = exports.setBatch = void 0;
+
+// Default to a dummy "batch" implementation that just runs the callback
+function defaultNoopBatch(callback) {
+  callback();
+}
+
+var batch = defaultNoopBatch; // Allow injecting another batching function later
+
+var setBatch = function setBatch(newBatch) {
+  return batch = newBatch;
+}; // Supply a getter just to skip dealing with ESM bindings
+
+
+exports.setBatch = setBatch;
+
+var getBatch = function getBatch() {
+  return batch;
+};
+
+exports.getBatch = getBatch;
+},{}],"64Bcp":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.useIsomorphicLayoutEffect = void 0;
+
+var _react = require("react");
+
+// React currently throws a warning when using useLayoutEffect on the server.
+// To get around it, we can conditionally useEffect on the server (no-op) and
+// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
+// subscription callback always has the selector from the latest render commit
+// available, otherwise a store update may happen between render and the effect,
+// which may cause missed updates; we also must ensure the store subscription
+// is created synchronously, otherwise a store update may occur before the
+// subscription is created and an inconsistent state may be observed
+var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? _react.useLayoutEffect : _react.useEffect;
+exports.useIsomorphicLayoutEffect = useIsomorphicLayoutEffect;
+},{"react":"3b2NM"}],"SPrTN":[function(require,module,exports) {
+"use strict";
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports["default"] = connectAdvanced;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+var _hoistNonReactStatics = _interopRequireDefault(require("hoist-non-react-statics"));
+var _react = _interopRequireWildcard(require("react"));
+var _reactIs = require("react-is");
+var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
+var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
+var _Context = require("./Context");
+// Define some constant arrays just to avoid re-creating these
+var EMPTY_ARRAY = [];
+var NO_SUBSCRIPTION_ARRAY = [null, null];
+var stringifyComponent = function stringifyComponent(Comp) {
+  try {
+    return JSON.stringify(Comp);
+  } catch (err) {
+    return String(Comp);
+  }
+};
+function storeStateUpdatesReducer(state, action) {
+  var updateCount = state[1];
+  return [action.payload, updateCount + 1];
+}
+function useIsomorphicLayoutEffectWithArgs(effectFunc, effectArgs, dependencies) {
+  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
+    return effectFunc.apply(void 0, effectArgs);
+  }, dependencies);
+}
+function captureWrapperProps(lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, actualChildProps, childPropsFromStoreUpdate, notifyNestedSubs) {
+  // We want to capture the wrapper props and child props we used for later comparisons
+  lastWrapperProps.current = wrapperProps;
+  lastChildProps.current = actualChildProps;
+  renderIsScheduled.current = false;
+  // If the render was from a store update, clear out that reference and cascade the subscriber update
+  if (childPropsFromStoreUpdate.current) {
+    childPropsFromStoreUpdate.current = null;
+    notifyNestedSubs();
+  }
+}
+function subscribeUpdates(shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, childPropsFromStoreUpdate, notifyNestedSubs, forceComponentUpdateDispatch) {
+  // If we're not subscribed to the store, nothing to do here
+  if (!shouldHandleStateChanges) return;
+  // Capture values for checking if and when this component unmounts
+  var didUnsubscribe = false;
+  var lastThrownError = null;
+  // We'll run this callback every time a store subscription update propagates to this component
+  var checkForUpdates = function checkForUpdates() {
+    if (didUnsubscribe) {
+      // Don't run stale listeners.
+      // Redux doesn't guarantee unsubscriptions happen until next dispatch.
+      return;
+    }
+    var latestStoreState = store.getState();
+    var newChildProps, error;
+    try {
+      // Actually run the selector with the most recent store state and wrapper props
+      // to determine what the child props should be
+      newChildProps = childPropsSelector(latestStoreState, lastWrapperProps.current);
+    } catch (e) {
+      error = e;
+      lastThrownError = e;
+    }
+    if (!error) {
+      lastThrownError = null;
+    }
+    // If the child props haven't changed, nothing to do here - cascade the subscription update
+    if (newChildProps === lastChildProps.current) {
+      if (!renderIsScheduled.current) {
+        notifyNestedSubs();
+      }
+    } else {
+      // Save references to the new child props.  Note that we track the "child props from store update"
+      // as a ref instead of a useState/useReducer because we need a way to determine if that value has
+      // been processed.  If this went into useState/useReducer, we couldn't clear out the value without
+      // forcing another re-render, which we don't want.
+      lastChildProps.current = newChildProps;
+      childPropsFromStoreUpdate.current = newChildProps;
+      renderIsScheduled.current = true;
+      // If the child props _did_ change (or we caught an error), this wrapper component needs to re-render
+      forceComponentUpdateDispatch({
+        type: 'STORE_UPDATED',
+        payload: {
+          error: error
+        }
+      });
+    }
+  };
+  // Actually subscribe to the nearest connected ancestor (or store)
+  subscription.onStateChange = checkForUpdates;
+  subscription.trySubscribe();
+  // Pull data from the store after first render in case the store has
+  // changed since we began.
+  checkForUpdates();
+  var unsubscribeWrapper = function unsubscribeWrapper() {
+    didUnsubscribe = true;
+    subscription.tryUnsubscribe();
+    subscription.onStateChange = null;
+    if (lastThrownError) {
+      // It's possible that we caught an error due to a bad mapState function, but the
+      // parent re-rendered without this component and we're about to unmount.
+      // This shouldn't happen as long as we do top-down subscriptions correctly, but
+      // if we ever do those wrong, this throw will surface the error in our tests.
+      // In that case, throw the error from here so it doesn't get lost.
+      throw lastThrownError;
+    }
+  };
+  return unsubscribeWrapper;
+}
+var initStateUpdates = function initStateUpdates() {
+  return [null, 0];
+};
+function connectAdvanced(/*
+selectorFactory is a func that is responsible for returning the selector function used to
+compute new props from state, props, and dispatch. For example:
+export default connectAdvanced((dispatch, options) => (state, props) => ({
+thing: state.things[props.thingId],
+saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
+}))(YourComponent)
+Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
+outside of their selector as an optimization. Options passed to connectAdvanced are passed to
+the selectorFactory, along with displayName and WrappedComponent, as the second argument.
+Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
+props. Do not use connectAdvanced directly without memoizing results between calls to your
+selector, otherwise the Connect component will re-render on every state or props change.
+*/
+selectorFactory, // options object:
+_ref) {
+  if (_ref === void 0) {
+    _ref = {};
+  }
+  var _ref2 = _ref, _ref2$getDisplayName = _ref2.getDisplayName, getDisplayName = _ref2$getDisplayName === void 0 ? function (name) {
+    return "ConnectAdvanced(" + name + ")";
+  } : _ref2$getDisplayName, _ref2$methodName = _ref2.methodName, methodName = _ref2$methodName === void 0 ? 'connectAdvanced' : _ref2$methodName, _ref2$renderCountProp = _ref2.renderCountProp, renderCountProp = _ref2$renderCountProp === void 0 ? undefined : _ref2$renderCountProp, _ref2$shouldHandleSta = _ref2.shouldHandleStateChanges, shouldHandleStateChanges = _ref2$shouldHandleSta === void 0 ? true : _ref2$shouldHandleSta, _ref2$storeKey = _ref2.storeKey, storeKey = _ref2$storeKey === void 0 ? 'store' : _ref2$storeKey, _ref2$withRef = _ref2.withRef, withRef = _ref2$withRef === void 0 ? false : _ref2$withRef, _ref2$forwardRef = _ref2.forwardRef, forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef, _ref2$context = _ref2.context, context = _ref2$context === void 0 ? _Context.ReactReduxContext : _ref2$context, connectOptions = (0, _objectWithoutPropertiesLoose2["default"])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
+  if ("development" !== 'production') {
+    if (renderCountProp !== undefined) {
+      throw new Error("renderCountProp is removed. render counting is built into the latest React Dev Tools profiling extension");
+    }
+    if (withRef) {
+      throw new Error('withRef is removed. To access the wrapped instance, use a ref on the connected component');
+    }
+    var customStoreWarningMessage = 'To use a custom Redux store for specific components, create a custom React context with ' + "React.createContext(), and pass the context object to React Redux's Provider and specific components" + ' like: <Provider context={MyContext}><ConnectedComponent context={MyContext} /></Provider>. ' + 'You may also pass a {context : MyContext} option to connect';
+    if (storeKey !== 'store') {
+      throw new Error('storeKey has been removed and does not do anything. ' + customStoreWarningMessage);
+    }
+  }
+  var Context = context;
+  return function wrapWithConnect(WrappedComponent) {
+    if ("development" !== 'production' && !(0, _reactIs.isValidElementType)(WrappedComponent)) {
+      throw new Error("You must pass a component to the function returned by " + (methodName + ". Instead received " + stringifyComponent(WrappedComponent)));
+    }
+    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    var displayName = getDisplayName(wrappedComponentName);
+    var selectorFactoryOptions = (0, _extends2["default"])({}, connectOptions, {
+      getDisplayName: getDisplayName,
+      methodName: methodName,
+      renderCountProp: renderCountProp,
+      shouldHandleStateChanges: shouldHandleStateChanges,
+      storeKey: storeKey,
+      displayName: displayName,
+      wrappedComponentName: wrappedComponentName,
+      WrappedComponent: WrappedComponent
+    });
+    var pure = connectOptions.pure;
+    function createChildSelector(store) {
+      return selectorFactory(store.dispatch, selectorFactoryOptions);
+    }
+    // If we aren't running in "pure" mode, we don't want to memoize values.
+    // To avoid conditionally calling hooks, we fall back to a tiny wrapper
+    // that just executes the given callback immediately.
+    var usePureOnlyMemo = pure ? _react.useMemo : function (callback) {
+      return callback();
+    };
+    function ConnectFunction(props) {
+      var _useMemo = (0, _react.useMemo)(function () {
+        // Distinguish between actual "data" props that were passed to the wrapper component,
+        // and values needed to control behavior (forwarded refs, alternate context instances).
+        // To maintain the wrapperProps object reference, memoize this destructuring.
+        var reactReduxForwardedRef = props.reactReduxForwardedRef, wrapperProps = (0, _objectWithoutPropertiesLoose2["default"])(props, ["reactReduxForwardedRef"]);
+        return [props.context, reactReduxForwardedRef, wrapperProps];
+      }, [props]), propsContext = _useMemo[0], reactReduxForwardedRef = _useMemo[1], wrapperProps = _useMemo[2];
+      var ContextToUse = (0, _react.useMemo)(function () {
+        // Users may optionally pass in a custom context instance to use instead of our ReactReduxContext.
+        // Memoize the check that determines which context instance we should use.
+        return propsContext && propsContext.Consumer && (0, _reactIs.isContextConsumer)(/*#__PURE__*/_react["default"].createElement(propsContext.Consumer, null)) ? propsContext : Context;
+      }, [propsContext, Context]);
+      // Retrieve the store and ancestor subscription via context, if available
+      var contextValue = (0, _react.useContext)(ContextToUse);
+      // The store _must_ exist as either a prop or in context.
+      // We'll check to see if it _looks_ like a Redux store first.
+      // This allows us to pass through a `store` prop that is just a plain value.
+      var didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
+      var didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
+      if ("development" !== 'production' && !didStoreComeFromProps && !didStoreComeFromContext) {
+        throw new Error("Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
+      }
+      // Based on the previous check, one of these must be true
+      var store = didStoreComeFromProps ? props.store : contextValue.store;
+      var childPropsSelector = (0, _react.useMemo)(function () {
+        // The child props selector needs the store reference as an input.
+        // Re-create this selector whenever the store changes.
+        return createChildSelector(store);
+      }, [store]);
+      var _useMemo2 = (0, _react.useMemo)(function () {
+        if (!shouldHandleStateChanges) return NO_SUBSCRIPTION_ARRAY;
+        // This Subscription's source should match where store came from: props vs. context. A component
+        // connected to the store via props shouldn't use subscription from context, or vice versa.
+        var subscription = new _Subscription["default"](store, didStoreComeFromProps ? null : contextValue.subscription);
+        // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
+        // the middle of the notification loop, where `subscription` will then be null. This can
+        // probably be avoided if Subscription's listeners logic is changed to not call listeners
+        // that have been unsubscribed in the  middle of the notification loop.
+        var notifyNestedSubs = subscription.notifyNestedSubs.bind(subscription);
+        return [subscription, notifyNestedSubs];
+      }, [store, didStoreComeFromProps, contextValue]), subscription = _useMemo2[0], notifyNestedSubs = _useMemo2[1];
+      // Determine what {store, subscription} value should be put into nested context, if necessary,
+      // and memoize that value to avoid unnecessary context updates.
+      var overriddenContextValue = (0, _react.useMemo)(function () {
+        if (didStoreComeFromProps) {
+          // This component is directly subscribed to a store from props.
+          // We don't want descendants reading from this store - pass down whatever
+          // the existing context value is from the nearest connected ancestor.
+          return contextValue;
+        }
+        // Otherwise, put this component's subscription instance into context, so that
+        // connected descendants won't update until after this component is done
+        return (0, _extends2["default"])({}, contextValue, {
+          subscription: subscription
+        });
+      }, [didStoreComeFromProps, contextValue, subscription]);
+      // We need to force this wrapper component to re-render whenever a Redux store update
+      // causes a change to the calculated child component props (or we caught an error in mapState)
+      var _useReducer = (0, _react.useReducer)(storeStateUpdatesReducer, EMPTY_ARRAY, initStateUpdates), _useReducer$ = _useReducer[0], previousStateUpdateResult = _useReducer$[0], forceComponentUpdateDispatch = _useReducer[1];
+      // Propagate any mapState/mapDispatch errors upwards
+      if (previousStateUpdateResult && previousStateUpdateResult.error) {
+        throw previousStateUpdateResult.error;
+      }
+      // Set up refs to coordinate values between the subscription effect and the render logic
+      var lastChildProps = (0, _react.useRef)();
+      var lastWrapperProps = (0, _react.useRef)(wrapperProps);
+      var childPropsFromStoreUpdate = (0, _react.useRef)();
+      var renderIsScheduled = (0, _react.useRef)(false);
+      var actualChildProps = usePureOnlyMemo(function () {
+        // Tricky logic here:
+        // - This render may have been triggered by a Redux store update that produced new child props
+        // - However, we may have gotten new wrapper props after that
+        // If we have new child props, and the same wrapper props, we know we should use the new child props as-is.
+        // But, if we have new wrapper props, those might change the child props, so we have to recalculate things.
+        // So, we'll use the child props from store update only if the wrapper props are the same as last time.
+        if (childPropsFromStoreUpdate.current && wrapperProps === lastWrapperProps.current) {
+          return childPropsFromStoreUpdate.current;
+        }
+        // TODO We're reading the store directly in render() here. Bad idea?
+        // This will likely cause Bad Things (TM) to happen in Concurrent Mode.
+        // Note that we do this because on renders _not_ caused by store updates, we need the latest store state
+        // to determine what the child props should be.
+        return childPropsSelector(store.getState(), wrapperProps);
+      }, [store, previousStateUpdateResult, wrapperProps]);
+      // We need this to execute synchronously every time we re-render. However, React warns
+      // about useLayoutEffect in SSR, so we try to detect environment and fall back to
+      // just useEffect instead to avoid the warning, since neither will run anyway.
+      useIsomorphicLayoutEffectWithArgs(captureWrapperProps, [lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, actualChildProps, childPropsFromStoreUpdate, notifyNestedSubs]);
+      // Our re-subscribe logic only runs when the store/subscription setup changes
+      useIsomorphicLayoutEffectWithArgs(subscribeUpdates, [shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, childPropsFromStoreUpdate, notifyNestedSubs, forceComponentUpdateDispatch], [store, subscription, childPropsSelector]);
+      // Now that all that's done, we can finally try to actually render the child component.
+      // We memoize the elements for the rendered child component as an optimization.
+      var renderedWrappedComponent = (0, _react.useMemo)(function () {
+        return (
+          /*#__PURE__*/_react["default"].createElement(WrappedComponent, (0, _extends2["default"])({}, actualChildProps, {
+            ref: reactReduxForwardedRef
+          }))
+        );
+      }, [reactReduxForwardedRef, WrappedComponent, actualChildProps]);
+      // If React sees the exact same element reference as last time, it bails out of re-rendering
+      // that child, same as if it was wrapped in React.memo() or returned false from shouldComponentUpdate.
+      var renderedChild = (0, _react.useMemo)(function () {
+        if (shouldHandleStateChanges) {
+          // If this component is subscribed to store updates, we need to pass its own
+          // subscription instance down to our descendants. That means rendering the same
+          // Context instance, and putting a different value into the context.
+          return (
+            /*#__PURE__*/_react["default"].createElement(ContextToUse.Provider, {
+              value: overriddenContextValue
+            }, renderedWrappedComponent)
+          );
+        }
+        return renderedWrappedComponent;
+      }, [ContextToUse, renderedWrappedComponent, overriddenContextValue]);
+      return renderedChild;
+    }
+    // If we're in "pure" mode, ensure our wrapper component only re-renders when incoming props have changed.
+    var Connect = pure ? _react["default"].memo(ConnectFunction) : ConnectFunction;
+    Connect.WrappedComponent = WrappedComponent;
+    Connect.displayName = ConnectFunction.displayName = displayName;
+    if (forwardRef) {
+      var forwarded = _react["default"].forwardRef(function forwardConnectRef(props, ref) {
+        return (
+          /*#__PURE__*/_react["default"].createElement(Connect, (0, _extends2["default"])({}, props, {
+            reactReduxForwardedRef: ref
+          }))
+        );
+      });
+      forwarded.displayName = displayName;
+      forwarded.WrappedComponent = WrappedComponent;
+      return (0, _hoistNonReactStatics["default"])(forwarded, WrappedComponent);
+    }
+    return (0, _hoistNonReactStatics["default"])(Connect, WrappedComponent);
+  };
+}
+
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","hoist-non-react-statics":"3nUHV","react":"3b2NM","react-is":"68QIU","../utils/Subscription":"Y1J0m","../utils/useIsomorphicLayoutEffect":"64Bcp","./Context":"6ScOK"}],"1HacB":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.createConnect = createConnect;
+exports["default"] = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _connectAdvanced = _interopRequireDefault(require("../components/connectAdvanced"));
+
+var _shallowEqual = _interopRequireDefault(require("../utils/shallowEqual"));
+
+var _mapDispatchToProps = _interopRequireDefault(require("./mapDispatchToProps"));
+
+var _mapStateToProps = _interopRequireDefault(require("./mapStateToProps"));
+
+var _mergeProps = _interopRequireDefault(require("./mergeProps"));
+
+var _selectorFactory = _interopRequireDefault(require("./selectorFactory"));
+
+/*
+  connect is a facade over connectAdvanced. It turns its args into a compatible
+  selectorFactory, which has the signature:
+
+    (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
+  
+  connect passes its args to connectAdvanced as options, which will in turn pass them to
+  selectorFactory each time a Connect component instance is instantiated or hot reloaded.
+
+  selectorFactory returns a final props selector from its mapStateToProps,
+  mapStateToPropsFactories, mapDispatchToProps, mapDispatchToPropsFactories, mergeProps,
+  mergePropsFactories, and pure args.
+
+  The resulting final props selector is called by the Connect component instance whenever
+  it receives new props or store state.
+ */
+function match(arg, factories, name) {
+  for (var i = factories.length - 1; i >= 0; i--) {
+    var result = factories[i](arg);
+    if (result) return result;
+  }
+
+  return function (dispatch, options) {
+    throw new Error("Invalid value of type " + typeof arg + " for " + name + " argument when connecting component " + options.wrappedComponentName + ".");
+  };
+}
+
+function strictEqual(a, b) {
+  return a === b;
+} // createConnect with default args builds the 'official' connect behavior. Calling it with
+// different options opens up some testing and extensibility scenarios
+
+
+function createConnect(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
+      _ref$connectHOC = _ref.connectHOC,
+      connectHOC = _ref$connectHOC === void 0 ? _connectAdvanced["default"] : _ref$connectHOC,
+      _ref$mapStateToPropsF = _ref.mapStateToPropsFactories,
+      mapStateToPropsFactories = _ref$mapStateToPropsF === void 0 ? _mapStateToProps["default"] : _ref$mapStateToPropsF,
+      _ref$mapDispatchToPro = _ref.mapDispatchToPropsFactories,
+      mapDispatchToPropsFactories = _ref$mapDispatchToPro === void 0 ? _mapDispatchToProps["default"] : _ref$mapDispatchToPro,
+      _ref$mergePropsFactor = _ref.mergePropsFactories,
+      mergePropsFactories = _ref$mergePropsFactor === void 0 ? _mergeProps["default"] : _ref$mergePropsFactor,
+      _ref$selectorFactory = _ref.selectorFactory,
+      selectorFactory = _ref$selectorFactory === void 0 ? _selectorFactory["default"] : _ref$selectorFactory;
+
+  return function connect(mapStateToProps, mapDispatchToProps, mergeProps, _ref2) {
+    if (_ref2 === void 0) {
+      _ref2 = {};
+    }
+
+    var _ref3 = _ref2,
+        _ref3$pure = _ref3.pure,
+        pure = _ref3$pure === void 0 ? true : _ref3$pure,
+        _ref3$areStatesEqual = _ref3.areStatesEqual,
+        areStatesEqual = _ref3$areStatesEqual === void 0 ? strictEqual : _ref3$areStatesEqual,
+        _ref3$areOwnPropsEqua = _ref3.areOwnPropsEqual,
+        areOwnPropsEqual = _ref3$areOwnPropsEqua === void 0 ? _shallowEqual["default"] : _ref3$areOwnPropsEqua,
+        _ref3$areStatePropsEq = _ref3.areStatePropsEqual,
+        areStatePropsEqual = _ref3$areStatePropsEq === void 0 ? _shallowEqual["default"] : _ref3$areStatePropsEq,
+        _ref3$areMergedPropsE = _ref3.areMergedPropsEqual,
+        areMergedPropsEqual = _ref3$areMergedPropsE === void 0 ? _shallowEqual["default"] : _ref3$areMergedPropsE,
+        extraOptions = (0, _objectWithoutPropertiesLoose2["default"])(_ref3, ["pure", "areStatesEqual", "areOwnPropsEqual", "areStatePropsEqual", "areMergedPropsEqual"]);
+    var initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps');
+    var initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories, 'mapDispatchToProps');
+    var initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps');
+    return connectHOC(selectorFactory, (0, _extends2["default"])({
+      // used in error messages
+      methodName: 'connect',
+      // used to compute Connect's displayName from the wrapped component's displayName.
+      getDisplayName: function getDisplayName(name) {
+        return "Connect(" + name + ")";
+      },
+      // if mapStateToProps is falsy, the Connect component doesn't subscribe to store state changes
+      shouldHandleStateChanges: Boolean(mapStateToProps),
+      // passed through to selectorFactory
+      initMapStateToProps: initMapStateToProps,
+      initMapDispatchToProps: initMapDispatchToProps,
+      initMergeProps: initMergeProps,
+      pure: pure,
+      areStatesEqual: areStatesEqual,
+      areOwnPropsEqual: areOwnPropsEqual,
+      areStatePropsEqual: areStatePropsEqual,
+      areMergedPropsEqual: areMergedPropsEqual
+    }, extraOptions));
+  };
+}
+
+var _default = /*#__PURE__*/createConnect();
+
+exports["default"] = _default;
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","../components/connectAdvanced":"SPrTN","../utils/shallowEqual":"1BbL9","./mapDispatchToProps":"aHbco","./mapStateToProps":"6esSH","./mergeProps":"4XiYM","./selectorFactory":"XQRNr"}],"1BbL9":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports["default"] = shallowEqual;
+
+function is(x, y) {
+  if (x === y) {
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    return x !== x && y !== y;
+  }
+}
+
+function shallowEqual(objA, objB) {
+  if (is(objA, objB)) return true;
+
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+  if (keysA.length !== keysB.length) return false;
+
+  for (var i = 0; i < keysA.length; i++) {
+    if (!Object.prototype.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+},{}],"aHbco":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.whenMapDispatchToPropsIsFunction = whenMapDispatchToPropsIsFunction;
+exports.whenMapDispatchToPropsIsMissing = whenMapDispatchToPropsIsMissing;
+exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
+exports["default"] = void 0;
+
+var _bindActionCreators = _interopRequireDefault(require("../utils/bindActionCreators"));
+
+var _wrapMapToProps = require("./wrapMapToProps");
+
+function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
+  return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
+}
+
+function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
+  return !mapDispatchToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
+    return {
+      dispatch: dispatch
+    };
+  }) : undefined;
+}
+
+function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
+  return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
+    return (0, _bindActionCreators["default"])(mapDispatchToProps, dispatch);
+  }) : undefined;
+}
+
+var _default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
+exports["default"] = _default;
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","../utils/bindActionCreators":"21ucm","./wrapMapToProps":"7rpe9"}],"21ucm":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports["default"] = bindActionCreators;
+
+function bindActionCreators(actionCreators, dispatch) {
+  var boundActionCreators = {};
+
+  var _loop = function _loop(key) {
+    var actionCreator = actionCreators[key];
+
+    if (typeof actionCreator === 'function') {
+      boundActionCreators[key] = function () {
+        return dispatch(actionCreator.apply(void 0, arguments));
+      };
+    }
+  };
+
+  for (var key in actionCreators) {
+    _loop(key);
+  }
+
+  return boundActionCreators;
+}
+},{}],"7rpe9":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.wrapMapToPropsConstant = wrapMapToPropsConstant;
+exports.getDependsOnOwnProps = getDependsOnOwnProps;
+exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
+var _verifyPlainObject = _interopRequireDefault(require("../utils/verifyPlainObject"));
+function wrapMapToPropsConstant(getConstant) {
+  return function initConstantSelector(dispatch, options) {
+    var constant = getConstant(dispatch, options);
+    function constantSelector() {
+      return constant;
+    }
+    constantSelector.dependsOnOwnProps = false;
+    return constantSelector;
+  };
+}
+// dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
+// to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
+// whether mapToProps needs to be invoked when props have changed.
+// 
+// A length of one signals that mapToProps does not depend on props from the parent component.
+// A length of zero is assumed to mean mapToProps is getting args via arguments or ...args and
+// therefore not reporting its length accurately..
+function getDependsOnOwnProps(mapToProps) {
+  return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
+}
+// Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
+// this function wraps mapToProps in a proxy function which does several things:
+// 
+// * Detects whether the mapToProps function being called depends on props, which
+// is used by selectorFactory to decide if it should reinvoke on props changes.
+// 
+// * On first call, handles mapToProps if returns another function, and treats that
+// new function as the true mapToProps for subsequent calls.
+// 
+// * On first call, verifies the first result is a plain object, in order to warn
+// the developer that their mapToProps function is not returning a valid result.
+// 
+function wrapMapToPropsFunc(mapToProps, methodName) {
+  return function initProxySelector(dispatch, _ref) {
+    var displayName = _ref.displayName;
+    var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
+      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
+    };
+    // allow detectFactoryAndVerify to get ownProps
+    proxy.dependsOnOwnProps = true;
+    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
+      proxy.mapToProps = mapToProps;
+      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
+      var props = proxy(stateOrDispatch, ownProps);
+      if (typeof props === 'function') {
+        proxy.mapToProps = props;
+        proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
+        props = proxy(stateOrDispatch, ownProps);
+      }
+      if ("development" !== 'production') (0, _verifyPlainObject["default"])(props, displayName, methodName);
+      return props;
+    };
+    return proxy;
+  };
+}
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","../utils/verifyPlainObject":"4G4Zn"}],"4G4Zn":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports["default"] = verifyPlainObject;
+
+var _isPlainObject = _interopRequireDefault(require("./isPlainObject"));
+
+var _warning = _interopRequireDefault(require("./warning"));
+
+function verifyPlainObject(value, displayName, methodName) {
+  if (!(0, _isPlainObject["default"])(value)) {
+    (0, _warning["default"])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
+  }
+}
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","./isPlainObject":"Gqg7l","./warning":"2YNtu"}],"Gqg7l":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports["default"] = isPlainObject;
+
+/**
+ * @param {any} obj The object to inspect.
+ * @returns {boolean} True if the argument appears to be a plain object.
+ */
+function isPlainObject(obj) {
+  if (typeof obj !== 'object' || obj === null) return false;
+  var proto = Object.getPrototypeOf(obj);
+  if (proto === null) return true;
+  var baseProto = proto;
+
+  while (Object.getPrototypeOf(baseProto) !== null) {
+    baseProto = Object.getPrototypeOf(baseProto);
+  }
+
+  return proto === baseProto;
+}
+},{}],"2YNtu":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports["default"] = warning;
+
+/**
+ * Prints a warning in the console if it exists.
+ *
+ * @param {String} message The warning message.
+ * @returns {void}
+ */
+function warning(message) {
+  /* eslint-disable no-console */
+  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+    console.error(message);
+  }
+  /* eslint-enable no-console */
+
+
+  try {
+    // This error was thrown as a convenience so that if you enable
+    // "break on all exceptions" in your console,
+    // it would pause the execution at this line.
+    throw new Error(message);
+    /* eslint-disable no-empty */
+  } catch (e) {}
+  /* eslint-enable no-empty */
+
+}
+},{}],"6esSH":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
+exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
+exports["default"] = void 0;
+
+var _wrapMapToProps = require("./wrapMapToProps");
+
+function whenMapStateToPropsIsFunction(mapStateToProps) {
+  return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
+}
+
+function whenMapStateToPropsIsMissing(mapStateToProps) {
+  return !mapStateToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function () {
+    return {};
+  }) : undefined;
+}
+
+var _default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
+exports["default"] = _default;
+},{"./wrapMapToProps":"7rpe9"}],"4XiYM":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.defaultMergeProps = defaultMergeProps;
+exports.wrapMergePropsFunc = wrapMergePropsFunc;
+exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
+exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
+exports["default"] = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _verifyPlainObject = _interopRequireDefault(require("../utils/verifyPlainObject"));
+function defaultMergeProps(stateProps, dispatchProps, ownProps) {
+  return (0, _extends2["default"])({}, ownProps, stateProps, dispatchProps);
+}
+function wrapMergePropsFunc(mergeProps) {
+  return function initMergePropsProxy(dispatch, _ref) {
+    var displayName = _ref.displayName, pure = _ref.pure, areMergedPropsEqual = _ref.areMergedPropsEqual;
+    var hasRunOnce = false;
+    var mergedProps;
+    return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
+      var nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+      if (hasRunOnce) {
+        if (!pure || !areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
+      } else {
+        hasRunOnce = true;
+        mergedProps = nextMergedProps;
+        if ("development" !== 'production') (0, _verifyPlainObject["default"])(mergedProps, displayName, 'mergeProps');
+      }
+      return mergedProps;
+    };
+  };
+}
+function whenMergePropsIsFunction(mergeProps) {
+  return typeof mergeProps === 'function' ? wrapMergePropsFunc(mergeProps) : undefined;
+}
+function whenMergePropsIsOmitted(mergeProps) {
+  return !mergeProps ? function () {
+    return defaultMergeProps;
+  } : undefined;
+}
+var _default = [whenMergePropsIsFunction, whenMergePropsIsOmitted];
+exports["default"] = _default;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","../utils/verifyPlainObject":"4G4Zn"}],"XQRNr":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.impureFinalPropsSelectorFactory = impureFinalPropsSelectorFactory;
+exports.pureFinalPropsSelectorFactory = pureFinalPropsSelectorFactory;
+exports["default"] = finalPropsSelectorFactory;
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+var _verifySubselectors = _interopRequireDefault(require("./verifySubselectors"));
+function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
+  return function impureFinalPropsSelector(state, ownProps) {
+    return mergeProps(mapStateToProps(state, ownProps), mapDispatchToProps(dispatch, ownProps), ownProps);
+  };
+}
+function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, _ref) {
+  var areStatesEqual = _ref.areStatesEqual, areOwnPropsEqual = _ref.areOwnPropsEqual, areStatePropsEqual = _ref.areStatePropsEqual;
+  var hasRunAtLeastOnce = false;
+  var state;
+  var ownProps;
+  var stateProps;
+  var dispatchProps;
+  var mergedProps;
+  function handleFirstCall(firstState, firstOwnProps) {
+    state = firstState;
+    ownProps = firstOwnProps;
+    stateProps = mapStateToProps(state, ownProps);
+    dispatchProps = mapDispatchToProps(dispatch, ownProps);
+    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+    hasRunAtLeastOnce = true;
+    return mergedProps;
+  }
+  function handleNewPropsAndNewState() {
+    stateProps = mapStateToProps(state, ownProps);
+    if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
+    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+    return mergedProps;
+  }
+  function handleNewProps() {
+    if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
+    if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
+    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+    return mergedProps;
+  }
+  function handleNewState() {
+    var nextStateProps = mapStateToProps(state, ownProps);
+    var statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
+    stateProps = nextStateProps;
+    if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
+    return mergedProps;
+  }
+  function handleSubsequentCalls(nextState, nextOwnProps) {
+    var propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
+    var stateChanged = !areStatesEqual(nextState, state);
+    state = nextState;
+    ownProps = nextOwnProps;
+    if (propsChanged && stateChanged) return handleNewPropsAndNewState();
+    if (propsChanged) return handleNewProps();
+    if (stateChanged) return handleNewState();
+    return mergedProps;
+  }
+  return function pureFinalPropsSelector(nextState, nextOwnProps) {
+    return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
+  };
+}
+// TODO: Add more comments
+// If pure is true, the selector returned by selectorFactory will memoize its results,
+// allowing connectAdvanced's shouldComponentUpdate to return false if final
+// props have not changed. If false, the selector will always return a new
+// object and shouldComponentUpdate will always return true.
+function finalPropsSelectorFactory(dispatch, _ref2) {
+  var initMapStateToProps = _ref2.initMapStateToProps, initMapDispatchToProps = _ref2.initMapDispatchToProps, initMergeProps = _ref2.initMergeProps, options = (0, _objectWithoutPropertiesLoose2["default"])(_ref2, ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"]);
+  var mapStateToProps = initMapStateToProps(dispatch, options);
+  var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
+  var mergeProps = initMergeProps(dispatch, options);
+  if ("development" !== 'production') {
+    (0, _verifySubselectors["default"])(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
+  }
+  var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
+  return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
+}
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","./verifySubselectors":"5MUxF"}],"5MUxF":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports["default"] = verifySubselectors;
+
+var _warning = _interopRequireDefault(require("../utils/warning"));
+
+function verify(selector, methodName, displayName) {
+  if (!selector) {
+    throw new Error("Unexpected value for " + methodName + " in " + displayName + ".");
+  } else if (methodName === 'mapStateToProps' || methodName === 'mapDispatchToProps') {
+    if (!Object.prototype.hasOwnProperty.call(selector, 'dependsOnOwnProps')) {
+      (0, _warning["default"])("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
+    }
+  }
+}
+
+function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, displayName) {
+  verify(mapStateToProps, 'mapStateToProps', displayName);
+  verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
+  verify(mergeProps, 'mergeProps', displayName);
+}
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","../utils/warning":"2YNtu"}],"4H7HK":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.createDispatchHook = createDispatchHook;
+exports.useDispatch = void 0;
+
+var _Context = require("../components/Context");
+
+var _useStore = require("./useStore");
+
+/**
+ * Hook factory, which creates a `useDispatch` hook bound to a given context.
+ *
+ * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
+ * @returns {Function} A `useDispatch` hook bound to the specified context.
+ */
+function createDispatchHook(context) {
+  if (context === void 0) {
+    context = _Context.ReactReduxContext;
+  }
+
+  var useStore = context === _Context.ReactReduxContext ? _useStore.useStore : (0, _useStore.createStoreHook)(context);
+  return function useDispatch() {
+    var store = useStore();
+    return store.dispatch;
+  };
+}
+/**
+ * A hook to access the redux `dispatch` function.
+ *
+ * @returns {any|function} redux store's `dispatch` function
+ *
+ * @example
+ *
+ * import React, { useCallback } from 'react'
+ * import { useDispatch } from 'react-redux'
+ *
+ * export const CounterComponent = ({ value }) => {
+ *   const dispatch = useDispatch()
+ *   const increaseCounter = useCallback(() => dispatch({ type: 'increase-counter' }), [])
+ *   return (
+ *     <div>
+ *       <span>{value}</span>
+ *       <button onClick={increaseCounter}>Increase counter</button>
+ *     </div>
+ *   )
+ * }
+ */
+
+
+var useDispatch = /*#__PURE__*/createDispatchHook();
+exports.useDispatch = useDispatch;
+},{"../components/Context":"6ScOK","./useStore":"5zPKn"}],"5zPKn":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.createStoreHook = createStoreHook;
+exports.useStore = void 0;
+
+var _react = require("react");
+
+var _Context = require("../components/Context");
+
+var _useReduxContext2 = require("./useReduxContext");
+
+/**
+ * Hook factory, which creates a `useStore` hook bound to a given context.
+ *
+ * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
+ * @returns {Function} A `useStore` hook bound to the specified context.
+ */
+function createStoreHook(context) {
+  if (context === void 0) {
+    context = _Context.ReactReduxContext;
+  }
+
+  var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
+    return (0, _react.useContext)(context);
+  };
+  return function useStore() {
+    var _useReduxContext = useReduxContext(),
+        store = _useReduxContext.store;
+
+    return store;
+  };
+}
+/**
+ * A hook to access the redux store.
+ *
+ * @returns {any} the redux store
+ *
+ * @example
+ *
+ * import React from 'react'
+ * import { useStore } from 'react-redux'
+ *
+ * export const ExampleComponent = () => {
+ *   const store = useStore()
+ *   return <div>{store.getState()}</div>
+ * }
+ */
+
+
+var useStore = /*#__PURE__*/createStoreHook();
+exports.useStore = useStore;
+},{"react":"3b2NM","../components/Context":"6ScOK","./useReduxContext":"46ppV"}],"46ppV":[function(require,module,exports) {
+"use strict";
+exports.__esModule = true;
+exports.useReduxContext = useReduxContext;
+var _react = require("react");
+var _Context = require("../components/Context");
+/**
+* A hook to access the value of the `ReactReduxContext`. This is a low-level
+* hook that you should usually not need to call directly.
+*
+* @returns {any} the value of the `ReactReduxContext`
+*
+* @example
+*
+* import React from 'react'
+* import { useReduxContext } from 'react-redux'
+*
+* export const CounterComponent = ({ value }) => {
+*   const { store } = useReduxContext()
+*   return <div>{store.getState()}</div>
+* }
+*/
+function useReduxContext() {
+  var contextValue = (0, _react.useContext)(_Context.ReactReduxContext);
+  if ("development" !== 'production' && !contextValue) {
+    throw new Error('could not find react-redux context value; please ensure the component is wrapped in a <Provider>');
+  }
+  return contextValue;
+}
+
+},{"react":"3b2NM","../components/Context":"6ScOK"}],"6dv0a":[function(require,module,exports) {
+"use strict";
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.createSelectorHook = createSelectorHook;
+exports.useSelector = void 0;
+var _react = require("react");
+var _useReduxContext2 = require("./useReduxContext");
+var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
+var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
+var _Context = require("../components/Context");
+var refEquality = function refEquality(a, b) {
+  return a === b;
+};
+function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub) {
+  var _useReducer = (0, _react.useReducer)(function (s) {
+    return s + 1;
+  }, 0), forceRender = _useReducer[1];
+  var subscription = (0, _react.useMemo)(function () {
+    return new _Subscription["default"](store, contextSub);
+  }, [store, contextSub]);
+  var latestSubscriptionCallbackError = (0, _react.useRef)();
+  var latestSelector = (0, _react.useRef)();
+  var latestStoreState = (0, _react.useRef)();
+  var latestSelectedState = (0, _react.useRef)();
+  var storeState = store.getState();
+  var selectedState;
+  try {
+    if (selector !== latestSelector.current || storeState !== latestStoreState.current || latestSubscriptionCallbackError.current) {
+      var newSelectedState = selector(storeState);
+      // ensure latest selected state is reused so that a custom equality function can result in identical references
+      if (latestSelectedState.current === undefined || !equalityFn(newSelectedState, latestSelectedState.current)) {
+        selectedState = newSelectedState;
+      } else {
+        selectedState = latestSelectedState.current;
+      }
+    } else {
+      selectedState = latestSelectedState.current;
+    }
+  } catch (err) {
+    if (latestSubscriptionCallbackError.current) {
+      err.message += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\n";
+    }
+    throw err;
+  }
+  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
+    latestSelector.current = selector;
+    latestStoreState.current = storeState;
+    latestSelectedState.current = selectedState;
+    latestSubscriptionCallbackError.current = undefined;
+  });
+  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
+    function checkForUpdates() {
+      try {
+        var newStoreState = store.getState();
+        var _newSelectedState = latestSelector.current(newStoreState);
+        if (equalityFn(_newSelectedState, latestSelectedState.current)) {
+          return;
+        }
+        latestSelectedState.current = _newSelectedState;
+        latestStoreState.current = newStoreState;
+      } catch (err) {
+        // we ignore all errors here, since when the component
+        // is re-rendered, the selectors are called again, and
+        // will throw again, if neither props nor store state
+        // changed
+        latestSubscriptionCallbackError.current = err;
+      }
+      forceRender();
+    }
+    subscription.onStateChange = checkForUpdates;
+    subscription.trySubscribe();
+    checkForUpdates();
+    return function () {
+      return subscription.tryUnsubscribe();
+    };
+  }, [store, subscription]);
+  return selectedState;
+}
+/**
+* Hook factory, which creates a `useSelector` hook bound to a given context.
+*
+* @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
+* @returns {Function} A `useSelector` hook bound to the specified context.
+*/
+function createSelectorHook(context) {
+  if (context === void 0) {
+    context = _Context.ReactReduxContext;
+  }
+  var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
+    return (0, _react.useContext)(context);
+  };
+  return function useSelector(selector, equalityFn) {
+    if (equalityFn === void 0) {
+      equalityFn = refEquality;
+    }
+    if ("development" !== 'production') {
+      if (!selector) {
+        throw new Error("You must pass a selector to useSelector");
+      }
+      if (typeof selector !== 'function') {
+        throw new Error("You must pass a function as a selector to useSelector");
+      }
+      if (typeof equalityFn !== 'function') {
+        throw new Error("You must pass a function as an equality function to useSelector");
+      }
+    }
+    var _useReduxContext = useReduxContext(), store = _useReduxContext.store, contextSub = _useReduxContext.subscription;
+    var selectedState = useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub);
+    (0, _react.useDebugValue)(selectedState);
+    return selectedState;
+  };
+}
+/**
+* A hook to access the redux store's state. This hook takes a selector function
+* as an argument. The selector is called with the store state.
+*
+* This hook takes an optional equality comparison function as the second parameter
+* that allows you to customize the way the selected state is compared to determine
+* whether the component needs to be re-rendered.
+*
+* @param {Function} selector the selector function
+* @param {Function=} equalityFn the function that will be used to determine equality
+*
+* @returns {any} the selected state
+*
+* @example
+*
+* import React from 'react'
+* import { useSelector } from 'react-redux'
+*
+* export const CounterComponent = () => {
+*   const counter = useSelector(state => state.counter)
+*   return <div>{counter}</div>
+* }
+*/
+var useSelector = /*#__PURE__*/createSelectorHook();
+exports.useSelector = useSelector;
+
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","react":"3b2NM","./useReduxContext":"46ppV","../utils/Subscription":"Y1J0m","../utils/useIsomorphicLayoutEffect":"64Bcp","../components/Context":"6ScOK"}],"12gEH":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.unstable_batchedUpdates = void 0;
+
+var _reactDom = require("react-dom");
+
+exports.unstable_batchedUpdates = _reactDom.unstable_batchedUpdates;
+},{"react-dom":"2sg1U"}],"5S6cN":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "SET_MOVIES", function () {
+  return SET_MOVIES;
+});
+_parcelHelpers.export(exports, "SET_FILTER", function () {
+  return SET_FILTER;
+});
+_parcelHelpers.export(exports, "SET_USER", function () {
+  return SET_USER;
+});
+_parcelHelpers.export(exports, "SET_FAVORITES", function () {
+  return SET_FAVORITES;
+});
+_parcelHelpers.export(exports, "setMovies", function () {
+  return setMovies;
+});
+_parcelHelpers.export(exports, "setFilter", function () {
+  return setFilter;
+});
+_parcelHelpers.export(exports, "setUser", function () {
+  return setUser;
+});
+_parcelHelpers.export(exports, "setFavorites", function () {
+  return setFavorites;
+});
+const SET_MOVIES = 'SET_MOVIES';
+const SET_FILTER = 'SET_FILTER';
+const SET_USER = 'SET_USER';
+const SET_FAVORITES = 'SET_FAVORITES';
+function setMovies(value) {
+  return {
+    type: SET_MOVIES,
+    value
+  };
+}
+function setFilter(value) {
+  return {
+    type: SET_FILTER,
+    value
+  };
+}
+function setUser(value) {
+  return {
+    type: SET_USER,
+    value
+  };
+}
+function setFavorites(value) {
+  return {
+    type: SET_FAVORITES,
+    value
+  };
+}
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6"}],"6M7fu":[function(require,module,exports) {
 var helpers = require("../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -34527,7 +36084,6 @@ try {
         Birth: birthdate
       }).then(response => {
         const data = response.data;
-        console.log(data);
         window.alert('successful registration');
         window.open('/', '_self');
       }).catch(e => {
@@ -34540,7 +36096,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 40,
+          lineNumber: 39,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -34548,14 +36104,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 41,
+          lineNumber: 40,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 42,
+          lineNumber: 41,
           columnNumber: 17
         }
       }, "Username"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -34566,7 +36122,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43,
+          lineNumber: 42,
           columnNumber: 17
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -34574,14 +36130,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 51,
+          lineNumber: 50,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52,
+          lineNumber: 51,
           columnNumber: 17
         }
       }, "Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -34593,7 +36149,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53,
+          lineNumber: 52,
           columnNumber: 17
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -34601,14 +36157,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 62,
+          lineNumber: 61,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 63,
+          lineNumber: 62,
           columnNumber: 17
         }
       }, "Email"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -34618,7 +36174,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 64,
+          lineNumber: 63,
           columnNumber: 17
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -34626,14 +36182,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71,
+          lineNumber: 70,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72,
+          lineNumber: 71,
           columnNumber: 17
         }
       }, "Birthdate (YYYY-MM-DD)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -34642,7 +36198,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73,
+          lineNumber: 72,
           columnNumber: 17
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapButtonDefault.default, {
@@ -34652,7 +36208,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 79,
+          lineNumber: 78,
           columnNumber: 13
         }
       }, "Submit"))
@@ -35061,85 +36617,7 @@ exports.useUncontrolledProp = _hook.useUncontrolledProp;
 var _uncontrollable = _interopRequireDefault(require("./uncontrollable"));
 
 exports.uncontrollable = _uncontrollable.default;
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/interopRequireWildcard":"28En5","./hook":"6NxN3","./uncontrollable":"4fGiz"}],"28En5":[function(require,module,exports) {
-var _typeof = require("@babel/runtime/helpers/typeof")["default"];
-
-function _getRequireWildcardCache(nodeInterop) {
-  if (typeof WeakMap !== "function") return null;
-  var cacheBabelInterop = new WeakMap();
-  var cacheNodeInterop = new WeakMap();
-  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
-    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-  })(nodeInterop);
-}
-
-function _interopRequireWildcard(obj, nodeInterop) {
-  if (!nodeInterop && obj && obj.__esModule) {
-    return obj;
-  }
-
-  if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") {
-    return {
-      "default": obj
-    };
-  }
-
-  var cache = _getRequireWildcardCache(nodeInterop);
-
-  if (cache && cache.has(obj)) {
-    return cache.get(obj);
-  }
-
-  var newObj = {};
-  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-
-  for (var key in obj) {
-    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
-      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-
-      if (desc && (desc.get || desc.set)) {
-        Object.defineProperty(newObj, key, desc);
-      } else {
-        newObj[key] = obj[key];
-      }
-    }
-  }
-
-  newObj["default"] = obj;
-
-  if (cache) {
-    cache.set(obj, newObj);
-  }
-
-  return newObj;
-}
-
-module.exports = _interopRequireWildcard;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{"@babel/runtime/helpers/typeof":"3F8fn"}],"3F8fn":[function(require,module,exports) {
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{}],"6NxN3":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/interopRequireWildcard":"28En5","./hook":"6NxN3","./uncontrollable":"4fGiz"}],"6NxN3":[function(require,module,exports) {
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -46966,12 +48444,7 @@ try {
           Authorization: `Bearer ${token}`
         }
       }).then(response => {
-        // const updatedFavorites = useSelector((state) =>
-        // state.movies.filter((m) =>
-        // response.data.FavoriteMovie.includes(m._id)
-        // )
-        // );
-        console.log(response.data.FavoriteMovies);
+        // console.log(response.data.FavoriteMovies);
         dispatch({
           type: _actionsActions.SET_FAVORITES,
           value: response.data.FavoriteMovies
@@ -47019,28 +48492,28 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 139,
+          lineNumber: 134,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h1", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 140,
+          lineNumber: 135,
           columnNumber: 13
         }
       }, "Welcome ", userData.Username, "!"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 141,
+          lineNumber: 136,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 142,
+          lineNumber: 137,
           columnNumber: 17
         }
       }, "Update Your Information:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47048,18 +48521,18 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 143,
+          lineNumber: 138,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 144,
+          lineNumber: 139,
           columnNumber: 21
         }
       }, "Username"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
-        minlength: "4",
+        minLength: "4",
         type: "text",
         placeholder: userData.Username,
         defaultValue: userData.Username,
@@ -47067,7 +48540,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 145,
+          lineNumber: 140,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47075,14 +48548,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 153,
+          lineNumber: 148,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 154,
+          lineNumber: 149,
           columnNumber: 21
         }
       }, "Email"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47093,7 +48566,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 155,
+          lineNumber: 150,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47101,14 +48574,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 162,
+          lineNumber: 157,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 163,
+          lineNumber: 158,
           columnNumber: 21
         }
       }, "Birthdate (YYYY-MM-DD)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47119,14 +48592,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 164,
+          lineNumber: 159,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 172,
+          lineNumber: 167,
           columnNumber: 17
         }
       }, "Update Your Password:"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47134,18 +48607,18 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 173,
+          lineNumber: 168,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 174,
+          lineNumber: 169,
           columnNumber: 21
         }
       }, "New Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
-        minlength: "4",
+        minLength: "4",
         type: "password",
         placeholder: "New Password",
         defaultValue: userData.Password,
@@ -47153,7 +48626,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 175,
+          lineNumber: 170,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Group, {
@@ -47161,14 +48634,14 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 183,
+          lineNumber: 178,
           columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Label, {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 184,
+          lineNumber: 179,
           columnNumber: 21
         }
       }, "Confirm Password"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Form.Control, {
@@ -47182,7 +48655,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 185,
+          lineNumber: 180,
           columnNumber: 21
         }
       }))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -47190,21 +48663,21 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 200,
+          lineNumber: 195,
           columnNumber: 13
         }
       }, " Update Account "), /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 201,
+          lineNumber: 196,
           columnNumber: 13
         }
       }, "Favorite Movies:"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 202,
+          lineNumber: 197,
           columnNumber: 13
         }
       }, favorites.map(favmov => {
@@ -47214,7 +48687,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 205,
+              lineNumber: 200,
               columnNumber: 25
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -47222,7 +48695,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 206,
+              lineNumber: 201,
               columnNumber: 29
             }
           }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Link, {
@@ -47230,7 +48703,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 207,
+              lineNumber: 202,
               columnNumber: 33
             }
           }, favmov.Title)), /*#__PURE__*/_reactDefault.default.createElement("span", {
@@ -47238,7 +48711,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 211,
+              lineNumber: 206,
               columnNumber: 29
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("img", {
@@ -47251,7 +48724,7 @@ try {
             __self: this,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 212,
+              lineNumber: 207,
               columnNumber: 33
             }
           })))
@@ -47260,7 +48733,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 225,
+          lineNumber: 220,
           columnNumber: 13
         }
       }, "Delete Your Account"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -47269,7 +48742,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 226,
+          lineNumber: 221,
           columnNumber: 13
         }
       }, "Delete Account"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrap.Button, {
@@ -47281,7 +48754,7 @@ try {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229,
+          lineNumber: 224,
           columnNumber: 13
         }
       }, "Back"))
@@ -47301,1464 +48774,7 @@ try {
 
 },{"react":"3b2NM","react-bootstrap":"4n7hB","@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6","../../../../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5qZyV","axios":"7rA65","react-router-dom":"1PMSK","url:../../assets/icons/delete.png":"1ZJOC","./profile-view.scss":"3kYjk","react-redux":"7GDa4","../../actions/actions":"5S6cN"}],"1ZJOC":[function(require,module,exports) {
 module.exports = require('./bundle-url').getBundleURL() + "delete.2bbc2902.png"
-},{"./bundle-url":"5IoJv"}],"3kYjk":[function() {},{}],"7GDa4":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-
-var _Provider = _interopRequireDefault(require("./components/Provider"));
-
-exports.Provider = _Provider["default"];
-
-var _connectAdvanced = _interopRequireDefault(require("./components/connectAdvanced"));
-
-exports.connectAdvanced = _connectAdvanced["default"];
-
-var _Context = require("./components/Context");
-
-exports.ReactReduxContext = _Context.ReactReduxContext;
-
-var _connect = _interopRequireDefault(require("./connect/connect"));
-
-exports.connect = _connect["default"];
-
-var _useDispatch = require("./hooks/useDispatch");
-
-exports.useDispatch = _useDispatch.useDispatch;
-exports.createDispatchHook = _useDispatch.createDispatchHook;
-
-var _useSelector = require("./hooks/useSelector");
-
-exports.useSelector = _useSelector.useSelector;
-exports.createSelectorHook = _useSelector.createSelectorHook;
-
-var _useStore = require("./hooks/useStore");
-
-exports.useStore = _useStore.useStore;
-exports.createStoreHook = _useStore.createStoreHook;
-
-var _batch = require("./utils/batch");
-
-var _reactBatchedUpdates = require("./utils/reactBatchedUpdates");
-
-exports.batch = _reactBatchedUpdates.unstable_batchedUpdates;
-
-var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
-
-exports.shallowEqual = _shallowEqual["default"];
-(0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","./components/Provider":"3bhyH","./components/connectAdvanced":"SPrTN","./components/Context":"6ScOK","./connect/connect":"1HacB","./hooks/useDispatch":"4H7HK","./hooks/useSelector":"6dv0a","./hooks/useStore":"5zPKn","./utils/batch":"XOS5r","./utils/reactBatchedUpdates":"12gEH","./utils/shallowEqual":"1BbL9"}],"3bhyH":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-exports.__esModule = true;
-exports["default"] = void 0;
-var _react = _interopRequireWildcard(require("react"));
-var _propTypes = _interopRequireDefault(require("prop-types"));
-var _Context = require("./Context");
-var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
-var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
-function Provider(_ref) {
-  var store = _ref.store, context = _ref.context, children = _ref.children;
-  var contextValue = (0, _react.useMemo)(function () {
-    var subscription = new _Subscription["default"](store);
-    subscription.onStateChange = subscription.notifyNestedSubs;
-    return {
-      store: store,
-      subscription: subscription
-    };
-  }, [store]);
-  var previousState = (0, _react.useMemo)(function () {
-    return store.getState();
-  }, [store]);
-  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
-    var subscription = contextValue.subscription;
-    subscription.trySubscribe();
-    if (previousState !== store.getState()) {
-      subscription.notifyNestedSubs();
-    }
-    return function () {
-      subscription.tryUnsubscribe();
-      subscription.onStateChange = null;
-    };
-  }, [contextValue, previousState]);
-  var Context = context || _Context.ReactReduxContext;
-  return (
-    /*#__PURE__*/_react["default"].createElement(Context.Provider, {
-      value: contextValue
-    }, children)
-  );
-}
-if ("development" !== 'production') {
-  Provider.propTypes = {
-    store: _propTypes["default"].shape({
-      subscribe: _propTypes["default"].func.isRequired,
-      dispatch: _propTypes["default"].func.isRequired,
-      getState: _propTypes["default"].func.isRequired
-    }),
-    context: _propTypes["default"].object,
-    children: _propTypes["default"].any
-  };
-}
-var _default = Provider;
-exports["default"] = _default;
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/interopRequireWildcard":"28En5","react":"3b2NM","prop-types":"4dfy5","./Context":"6ScOK","../utils/Subscription":"Y1J0m","../utils/useIsomorphicLayoutEffect":"64Bcp"}],"6ScOK":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports["default"] = exports.ReactReduxContext = void 0;
-var _react = _interopRequireDefault(require("react"));
-var ReactReduxContext = /*#__PURE__*/_react["default"].createContext(null);
-exports.ReactReduxContext = ReactReduxContext;
-if ("development" !== 'production') {
-  ReactReduxContext.displayName = 'ReactRedux';
-}
-var _default = ReactReduxContext;
-exports["default"] = _default;
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","react":"3b2NM"}],"Y1J0m":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = void 0;
-
-var _batch = require("./batch");
-
-// encapsulates the subscription logic for connecting a component to the redux store, as
-// well as nesting subscriptions of descendant components, so that we can ensure the
-// ancestor components re-render before descendants
-var nullListeners = {
-  notify: function notify() {}
-};
-
-function createListenerCollection() {
-  var batch = (0, _batch.getBatch)();
-  var first = null;
-  var last = null;
-  return {
-    clear: function clear() {
-      first = null;
-      last = null;
-    },
-    notify: function notify() {
-      batch(function () {
-        var listener = first;
-
-        while (listener) {
-          listener.callback();
-          listener = listener.next;
-        }
-      });
-    },
-    get: function get() {
-      var listeners = [];
-      var listener = first;
-
-      while (listener) {
-        listeners.push(listener);
-        listener = listener.next;
-      }
-
-      return listeners;
-    },
-    subscribe: function subscribe(callback) {
-      var isSubscribed = true;
-      var listener = last = {
-        callback: callback,
-        next: null,
-        prev: last
-      };
-
-      if (listener.prev) {
-        listener.prev.next = listener;
-      } else {
-        first = listener;
-      }
-
-      return function unsubscribe() {
-        if (!isSubscribed || first === null) return;
-        isSubscribed = false;
-
-        if (listener.next) {
-          listener.next.prev = listener.prev;
-        } else {
-          last = listener.prev;
-        }
-
-        if (listener.prev) {
-          listener.prev.next = listener.next;
-        } else {
-          first = listener.next;
-        }
-      };
-    }
-  };
-}
-
-var Subscription = /*#__PURE__*/function () {
-  function Subscription(store, parentSub) {
-    this.store = store;
-    this.parentSub = parentSub;
-    this.unsubscribe = null;
-    this.listeners = nullListeners;
-    this.handleChangeWrapper = this.handleChangeWrapper.bind(this);
-  }
-
-  var _proto = Subscription.prototype;
-
-  _proto.addNestedSub = function addNestedSub(listener) {
-    this.trySubscribe();
-    return this.listeners.subscribe(listener);
-  };
-
-  _proto.notifyNestedSubs = function notifyNestedSubs() {
-    this.listeners.notify();
-  };
-
-  _proto.handleChangeWrapper = function handleChangeWrapper() {
-    if (this.onStateChange) {
-      this.onStateChange();
-    }
-  };
-
-  _proto.isSubscribed = function isSubscribed() {
-    return Boolean(this.unsubscribe);
-  };
-
-  _proto.trySubscribe = function trySubscribe() {
-    if (!this.unsubscribe) {
-      this.unsubscribe = this.parentSub ? this.parentSub.addNestedSub(this.handleChangeWrapper) : this.store.subscribe(this.handleChangeWrapper);
-      this.listeners = createListenerCollection();
-    }
-  };
-
-  _proto.tryUnsubscribe = function tryUnsubscribe() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
-      this.listeners.clear();
-      this.listeners = nullListeners;
-    }
-  };
-
-  return Subscription;
-}();
-
-exports["default"] = Subscription;
-},{"./batch":"XOS5r"}],"XOS5r":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports.getBatch = exports.setBatch = void 0;
-
-// Default to a dummy "batch" implementation that just runs the callback
-function defaultNoopBatch(callback) {
-  callback();
-}
-
-var batch = defaultNoopBatch; // Allow injecting another batching function later
-
-var setBatch = function setBatch(newBatch) {
-  return batch = newBatch;
-}; // Supply a getter just to skip dealing with ESM bindings
-
-
-exports.setBatch = setBatch;
-
-var getBatch = function getBatch() {
-  return batch;
-};
-
-exports.getBatch = getBatch;
-},{}],"64Bcp":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports.useIsomorphicLayoutEffect = void 0;
-
-var _react = require("react");
-
-// React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
-// subscription callback always has the selector from the latest render commit
-// available, otherwise a store update may happen between render and the effect,
-// which may cause missed updates; we also must ensure the store subscription
-// is created synchronously, otherwise a store update may occur before the
-// subscription is created and an inconsistent state may be observed
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? _react.useLayoutEffect : _react.useEffect;
-exports.useIsomorphicLayoutEffect = useIsomorphicLayoutEffect;
-},{"react":"3b2NM"}],"SPrTN":[function(require,module,exports) {
-"use strict";
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports["default"] = connectAdvanced;
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-var _hoistNonReactStatics = _interopRequireDefault(require("hoist-non-react-statics"));
-var _react = _interopRequireWildcard(require("react"));
-var _reactIs = require("react-is");
-var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
-var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
-var _Context = require("./Context");
-// Define some constant arrays just to avoid re-creating these
-var EMPTY_ARRAY = [];
-var NO_SUBSCRIPTION_ARRAY = [null, null];
-var stringifyComponent = function stringifyComponent(Comp) {
-  try {
-    return JSON.stringify(Comp);
-  } catch (err) {
-    return String(Comp);
-  }
-};
-function storeStateUpdatesReducer(state, action) {
-  var updateCount = state[1];
-  return [action.payload, updateCount + 1];
-}
-function useIsomorphicLayoutEffectWithArgs(effectFunc, effectArgs, dependencies) {
-  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
-    return effectFunc.apply(void 0, effectArgs);
-  }, dependencies);
-}
-function captureWrapperProps(lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, actualChildProps, childPropsFromStoreUpdate, notifyNestedSubs) {
-  // We want to capture the wrapper props and child props we used for later comparisons
-  lastWrapperProps.current = wrapperProps;
-  lastChildProps.current = actualChildProps;
-  renderIsScheduled.current = false;
-  // If the render was from a store update, clear out that reference and cascade the subscriber update
-  if (childPropsFromStoreUpdate.current) {
-    childPropsFromStoreUpdate.current = null;
-    notifyNestedSubs();
-  }
-}
-function subscribeUpdates(shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, childPropsFromStoreUpdate, notifyNestedSubs, forceComponentUpdateDispatch) {
-  // If we're not subscribed to the store, nothing to do here
-  if (!shouldHandleStateChanges) return;
-  // Capture values for checking if and when this component unmounts
-  var didUnsubscribe = false;
-  var lastThrownError = null;
-  // We'll run this callback every time a store subscription update propagates to this component
-  var checkForUpdates = function checkForUpdates() {
-    if (didUnsubscribe) {
-      // Don't run stale listeners.
-      // Redux doesn't guarantee unsubscriptions happen until next dispatch.
-      return;
-    }
-    var latestStoreState = store.getState();
-    var newChildProps, error;
-    try {
-      // Actually run the selector with the most recent store state and wrapper props
-      // to determine what the child props should be
-      newChildProps = childPropsSelector(latestStoreState, lastWrapperProps.current);
-    } catch (e) {
-      error = e;
-      lastThrownError = e;
-    }
-    if (!error) {
-      lastThrownError = null;
-    }
-    // If the child props haven't changed, nothing to do here - cascade the subscription update
-    if (newChildProps === lastChildProps.current) {
-      if (!renderIsScheduled.current) {
-        notifyNestedSubs();
-      }
-    } else {
-      // Save references to the new child props.  Note that we track the "child props from store update"
-      // as a ref instead of a useState/useReducer because we need a way to determine if that value has
-      // been processed.  If this went into useState/useReducer, we couldn't clear out the value without
-      // forcing another re-render, which we don't want.
-      lastChildProps.current = newChildProps;
-      childPropsFromStoreUpdate.current = newChildProps;
-      renderIsScheduled.current = true;
-      // If the child props _did_ change (or we caught an error), this wrapper component needs to re-render
-      forceComponentUpdateDispatch({
-        type: 'STORE_UPDATED',
-        payload: {
-          error: error
-        }
-      });
-    }
-  };
-  // Actually subscribe to the nearest connected ancestor (or store)
-  subscription.onStateChange = checkForUpdates;
-  subscription.trySubscribe();
-  // Pull data from the store after first render in case the store has
-  // changed since we began.
-  checkForUpdates();
-  var unsubscribeWrapper = function unsubscribeWrapper() {
-    didUnsubscribe = true;
-    subscription.tryUnsubscribe();
-    subscription.onStateChange = null;
-    if (lastThrownError) {
-      // It's possible that we caught an error due to a bad mapState function, but the
-      // parent re-rendered without this component and we're about to unmount.
-      // This shouldn't happen as long as we do top-down subscriptions correctly, but
-      // if we ever do those wrong, this throw will surface the error in our tests.
-      // In that case, throw the error from here so it doesn't get lost.
-      throw lastThrownError;
-    }
-  };
-  return unsubscribeWrapper;
-}
-var initStateUpdates = function initStateUpdates() {
-  return [null, 0];
-};
-function connectAdvanced(/*
-selectorFactory is a func that is responsible for returning the selector function used to
-compute new props from state, props, and dispatch. For example:
-export default connectAdvanced((dispatch, options) => (state, props) => ({
-thing: state.things[props.thingId],
-saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
-}))(YourComponent)
-Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
-outside of their selector as an optimization. Options passed to connectAdvanced are passed to
-the selectorFactory, along with displayName and WrappedComponent, as the second argument.
-Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
-props. Do not use connectAdvanced directly without memoizing results between calls to your
-selector, otherwise the Connect component will re-render on every state or props change.
-*/
-selectorFactory, // options object:
-_ref) {
-  if (_ref === void 0) {
-    _ref = {};
-  }
-  var _ref2 = _ref, _ref2$getDisplayName = _ref2.getDisplayName, getDisplayName = _ref2$getDisplayName === void 0 ? function (name) {
-    return "ConnectAdvanced(" + name + ")";
-  } : _ref2$getDisplayName, _ref2$methodName = _ref2.methodName, methodName = _ref2$methodName === void 0 ? 'connectAdvanced' : _ref2$methodName, _ref2$renderCountProp = _ref2.renderCountProp, renderCountProp = _ref2$renderCountProp === void 0 ? undefined : _ref2$renderCountProp, _ref2$shouldHandleSta = _ref2.shouldHandleStateChanges, shouldHandleStateChanges = _ref2$shouldHandleSta === void 0 ? true : _ref2$shouldHandleSta, _ref2$storeKey = _ref2.storeKey, storeKey = _ref2$storeKey === void 0 ? 'store' : _ref2$storeKey, _ref2$withRef = _ref2.withRef, withRef = _ref2$withRef === void 0 ? false : _ref2$withRef, _ref2$forwardRef = _ref2.forwardRef, forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef, _ref2$context = _ref2.context, context = _ref2$context === void 0 ? _Context.ReactReduxContext : _ref2$context, connectOptions = (0, _objectWithoutPropertiesLoose2["default"])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
-  if ("development" !== 'production') {
-    if (renderCountProp !== undefined) {
-      throw new Error("renderCountProp is removed. render counting is built into the latest React Dev Tools profiling extension");
-    }
-    if (withRef) {
-      throw new Error('withRef is removed. To access the wrapped instance, use a ref on the connected component');
-    }
-    var customStoreWarningMessage = 'To use a custom Redux store for specific components, create a custom React context with ' + "React.createContext(), and pass the context object to React Redux's Provider and specific components" + ' like: <Provider context={MyContext}><ConnectedComponent context={MyContext} /></Provider>. ' + 'You may also pass a {context : MyContext} option to connect';
-    if (storeKey !== 'store') {
-      throw new Error('storeKey has been removed and does not do anything. ' + customStoreWarningMessage);
-    }
-  }
-  var Context = context;
-  return function wrapWithConnect(WrappedComponent) {
-    if ("development" !== 'production' && !(0, _reactIs.isValidElementType)(WrappedComponent)) {
-      throw new Error("You must pass a component to the function returned by " + (methodName + ". Instead received " + stringifyComponent(WrappedComponent)));
-    }
-    var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
-    var displayName = getDisplayName(wrappedComponentName);
-    var selectorFactoryOptions = (0, _extends2["default"])({}, connectOptions, {
-      getDisplayName: getDisplayName,
-      methodName: methodName,
-      renderCountProp: renderCountProp,
-      shouldHandleStateChanges: shouldHandleStateChanges,
-      storeKey: storeKey,
-      displayName: displayName,
-      wrappedComponentName: wrappedComponentName,
-      WrappedComponent: WrappedComponent
-    });
-    var pure = connectOptions.pure;
-    function createChildSelector(store) {
-      return selectorFactory(store.dispatch, selectorFactoryOptions);
-    }
-    // If we aren't running in "pure" mode, we don't want to memoize values.
-    // To avoid conditionally calling hooks, we fall back to a tiny wrapper
-    // that just executes the given callback immediately.
-    var usePureOnlyMemo = pure ? _react.useMemo : function (callback) {
-      return callback();
-    };
-    function ConnectFunction(props) {
-      var _useMemo = (0, _react.useMemo)(function () {
-        // Distinguish between actual "data" props that were passed to the wrapper component,
-        // and values needed to control behavior (forwarded refs, alternate context instances).
-        // To maintain the wrapperProps object reference, memoize this destructuring.
-        var reactReduxForwardedRef = props.reactReduxForwardedRef, wrapperProps = (0, _objectWithoutPropertiesLoose2["default"])(props, ["reactReduxForwardedRef"]);
-        return [props.context, reactReduxForwardedRef, wrapperProps];
-      }, [props]), propsContext = _useMemo[0], reactReduxForwardedRef = _useMemo[1], wrapperProps = _useMemo[2];
-      var ContextToUse = (0, _react.useMemo)(function () {
-        // Users may optionally pass in a custom context instance to use instead of our ReactReduxContext.
-        // Memoize the check that determines which context instance we should use.
-        return propsContext && propsContext.Consumer && (0, _reactIs.isContextConsumer)(/*#__PURE__*/_react["default"].createElement(propsContext.Consumer, null)) ? propsContext : Context;
-      }, [propsContext, Context]);
-      // Retrieve the store and ancestor subscription via context, if available
-      var contextValue = (0, _react.useContext)(ContextToUse);
-      // The store _must_ exist as either a prop or in context.
-      // We'll check to see if it _looks_ like a Redux store first.
-      // This allows us to pass through a `store` prop that is just a plain value.
-      var didStoreComeFromProps = Boolean(props.store) && Boolean(props.store.getState) && Boolean(props.store.dispatch);
-      var didStoreComeFromContext = Boolean(contextValue) && Boolean(contextValue.store);
-      if ("development" !== 'production' && !didStoreComeFromProps && !didStoreComeFromContext) {
-        throw new Error("Could not find \"store\" in the context of " + ("\"" + displayName + "\". Either wrap the root component in a <Provider>, ") + "or pass a custom React context provider to <Provider> and the corresponding " + ("React context consumer to " + displayName + " in connect options."));
-      }
-      // Based on the previous check, one of these must be true
-      var store = didStoreComeFromProps ? props.store : contextValue.store;
-      var childPropsSelector = (0, _react.useMemo)(function () {
-        // The child props selector needs the store reference as an input.
-        // Re-create this selector whenever the store changes.
-        return createChildSelector(store);
-      }, [store]);
-      var _useMemo2 = (0, _react.useMemo)(function () {
-        if (!shouldHandleStateChanges) return NO_SUBSCRIPTION_ARRAY;
-        // This Subscription's source should match where store came from: props vs. context. A component
-        // connected to the store via props shouldn't use subscription from context, or vice versa.
-        var subscription = new _Subscription["default"](store, didStoreComeFromProps ? null : contextValue.subscription);
-        // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
-        // the middle of the notification loop, where `subscription` will then be null. This can
-        // probably be avoided if Subscription's listeners logic is changed to not call listeners
-        // that have been unsubscribed in the  middle of the notification loop.
-        var notifyNestedSubs = subscription.notifyNestedSubs.bind(subscription);
-        return [subscription, notifyNestedSubs];
-      }, [store, didStoreComeFromProps, contextValue]), subscription = _useMemo2[0], notifyNestedSubs = _useMemo2[1];
-      // Determine what {store, subscription} value should be put into nested context, if necessary,
-      // and memoize that value to avoid unnecessary context updates.
-      var overriddenContextValue = (0, _react.useMemo)(function () {
-        if (didStoreComeFromProps) {
-          // This component is directly subscribed to a store from props.
-          // We don't want descendants reading from this store - pass down whatever
-          // the existing context value is from the nearest connected ancestor.
-          return contextValue;
-        }
-        // Otherwise, put this component's subscription instance into context, so that
-        // connected descendants won't update until after this component is done
-        return (0, _extends2["default"])({}, contextValue, {
-          subscription: subscription
-        });
-      }, [didStoreComeFromProps, contextValue, subscription]);
-      // We need to force this wrapper component to re-render whenever a Redux store update
-      // causes a change to the calculated child component props (or we caught an error in mapState)
-      var _useReducer = (0, _react.useReducer)(storeStateUpdatesReducer, EMPTY_ARRAY, initStateUpdates), _useReducer$ = _useReducer[0], previousStateUpdateResult = _useReducer$[0], forceComponentUpdateDispatch = _useReducer[1];
-      // Propagate any mapState/mapDispatch errors upwards
-      if (previousStateUpdateResult && previousStateUpdateResult.error) {
-        throw previousStateUpdateResult.error;
-      }
-      // Set up refs to coordinate values between the subscription effect and the render logic
-      var lastChildProps = (0, _react.useRef)();
-      var lastWrapperProps = (0, _react.useRef)(wrapperProps);
-      var childPropsFromStoreUpdate = (0, _react.useRef)();
-      var renderIsScheduled = (0, _react.useRef)(false);
-      var actualChildProps = usePureOnlyMemo(function () {
-        // Tricky logic here:
-        // - This render may have been triggered by a Redux store update that produced new child props
-        // - However, we may have gotten new wrapper props after that
-        // If we have new child props, and the same wrapper props, we know we should use the new child props as-is.
-        // But, if we have new wrapper props, those might change the child props, so we have to recalculate things.
-        // So, we'll use the child props from store update only if the wrapper props are the same as last time.
-        if (childPropsFromStoreUpdate.current && wrapperProps === lastWrapperProps.current) {
-          return childPropsFromStoreUpdate.current;
-        }
-        // TODO We're reading the store directly in render() here. Bad idea?
-        // This will likely cause Bad Things (TM) to happen in Concurrent Mode.
-        // Note that we do this because on renders _not_ caused by store updates, we need the latest store state
-        // to determine what the child props should be.
-        return childPropsSelector(store.getState(), wrapperProps);
-      }, [store, previousStateUpdateResult, wrapperProps]);
-      // We need this to execute synchronously every time we re-render. However, React warns
-      // about useLayoutEffect in SSR, so we try to detect environment and fall back to
-      // just useEffect instead to avoid the warning, since neither will run anyway.
-      useIsomorphicLayoutEffectWithArgs(captureWrapperProps, [lastWrapperProps, lastChildProps, renderIsScheduled, wrapperProps, actualChildProps, childPropsFromStoreUpdate, notifyNestedSubs]);
-      // Our re-subscribe logic only runs when the store/subscription setup changes
-      useIsomorphicLayoutEffectWithArgs(subscribeUpdates, [shouldHandleStateChanges, store, subscription, childPropsSelector, lastWrapperProps, lastChildProps, renderIsScheduled, childPropsFromStoreUpdate, notifyNestedSubs, forceComponentUpdateDispatch], [store, subscription, childPropsSelector]);
-      // Now that all that's done, we can finally try to actually render the child component.
-      // We memoize the elements for the rendered child component as an optimization.
-      var renderedWrappedComponent = (0, _react.useMemo)(function () {
-        return (
-          /*#__PURE__*/_react["default"].createElement(WrappedComponent, (0, _extends2["default"])({}, actualChildProps, {
-            ref: reactReduxForwardedRef
-          }))
-        );
-      }, [reactReduxForwardedRef, WrappedComponent, actualChildProps]);
-      // If React sees the exact same element reference as last time, it bails out of re-rendering
-      // that child, same as if it was wrapped in React.memo() or returned false from shouldComponentUpdate.
-      var renderedChild = (0, _react.useMemo)(function () {
-        if (shouldHandleStateChanges) {
-          // If this component is subscribed to store updates, we need to pass its own
-          // subscription instance down to our descendants. That means rendering the same
-          // Context instance, and putting a different value into the context.
-          return (
-            /*#__PURE__*/_react["default"].createElement(ContextToUse.Provider, {
-              value: overriddenContextValue
-            }, renderedWrappedComponent)
-          );
-        }
-        return renderedWrappedComponent;
-      }, [ContextToUse, renderedWrappedComponent, overriddenContextValue]);
-      return renderedChild;
-    }
-    // If we're in "pure" mode, ensure our wrapper component only re-renders when incoming props have changed.
-    var Connect = pure ? _react["default"].memo(ConnectFunction) : ConnectFunction;
-    Connect.WrappedComponent = WrappedComponent;
-    Connect.displayName = ConnectFunction.displayName = displayName;
-    if (forwardRef) {
-      var forwarded = _react["default"].forwardRef(function forwardConnectRef(props, ref) {
-        return (
-          /*#__PURE__*/_react["default"].createElement(Connect, (0, _extends2["default"])({}, props, {
-            reactReduxForwardedRef: ref
-          }))
-        );
-      });
-      forwarded.displayName = displayName;
-      forwarded.WrappedComponent = WrappedComponent;
-      return (0, _hoistNonReactStatics["default"])(forwarded, WrappedComponent);
-    }
-    return (0, _hoistNonReactStatics["default"])(Connect, WrappedComponent);
-  };
-}
-
-},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","hoist-non-react-statics":"3nUHV","react":"3b2NM","react-is":"68QIU","../utils/Subscription":"Y1J0m","../utils/useIsomorphicLayoutEffect":"64Bcp","./Context":"6ScOK"}],"1HacB":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-exports.createConnect = createConnect;
-exports["default"] = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
-var _connectAdvanced = _interopRequireDefault(require("../components/connectAdvanced"));
-
-var _shallowEqual = _interopRequireDefault(require("../utils/shallowEqual"));
-
-var _mapDispatchToProps = _interopRequireDefault(require("./mapDispatchToProps"));
-
-var _mapStateToProps = _interopRequireDefault(require("./mapStateToProps"));
-
-var _mergeProps = _interopRequireDefault(require("./mergeProps"));
-
-var _selectorFactory = _interopRequireDefault(require("./selectorFactory"));
-
-/*
-  connect is a facade over connectAdvanced. It turns its args into a compatible
-  selectorFactory, which has the signature:
-
-    (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
-  
-  connect passes its args to connectAdvanced as options, which will in turn pass them to
-  selectorFactory each time a Connect component instance is instantiated or hot reloaded.
-
-  selectorFactory returns a final props selector from its mapStateToProps,
-  mapStateToPropsFactories, mapDispatchToProps, mapDispatchToPropsFactories, mergeProps,
-  mergePropsFactories, and pure args.
-
-  The resulting final props selector is called by the Connect component instance whenever
-  it receives new props or store state.
- */
-function match(arg, factories, name) {
-  for (var i = factories.length - 1; i >= 0; i--) {
-    var result = factories[i](arg);
-    if (result) return result;
-  }
-
-  return function (dispatch, options) {
-    throw new Error("Invalid value of type " + typeof arg + " for " + name + " argument when connecting component " + options.wrappedComponentName + ".");
-  };
-}
-
-function strictEqual(a, b) {
-  return a === b;
-} // createConnect with default args builds the 'official' connect behavior. Calling it with
-// different options opens up some testing and extensibility scenarios
-
-
-function createConnect(_temp) {
-  var _ref = _temp === void 0 ? {} : _temp,
-      _ref$connectHOC = _ref.connectHOC,
-      connectHOC = _ref$connectHOC === void 0 ? _connectAdvanced["default"] : _ref$connectHOC,
-      _ref$mapStateToPropsF = _ref.mapStateToPropsFactories,
-      mapStateToPropsFactories = _ref$mapStateToPropsF === void 0 ? _mapStateToProps["default"] : _ref$mapStateToPropsF,
-      _ref$mapDispatchToPro = _ref.mapDispatchToPropsFactories,
-      mapDispatchToPropsFactories = _ref$mapDispatchToPro === void 0 ? _mapDispatchToProps["default"] : _ref$mapDispatchToPro,
-      _ref$mergePropsFactor = _ref.mergePropsFactories,
-      mergePropsFactories = _ref$mergePropsFactor === void 0 ? _mergeProps["default"] : _ref$mergePropsFactor,
-      _ref$selectorFactory = _ref.selectorFactory,
-      selectorFactory = _ref$selectorFactory === void 0 ? _selectorFactory["default"] : _ref$selectorFactory;
-
-  return function connect(mapStateToProps, mapDispatchToProps, mergeProps, _ref2) {
-    if (_ref2 === void 0) {
-      _ref2 = {};
-    }
-
-    var _ref3 = _ref2,
-        _ref3$pure = _ref3.pure,
-        pure = _ref3$pure === void 0 ? true : _ref3$pure,
-        _ref3$areStatesEqual = _ref3.areStatesEqual,
-        areStatesEqual = _ref3$areStatesEqual === void 0 ? strictEqual : _ref3$areStatesEqual,
-        _ref3$areOwnPropsEqua = _ref3.areOwnPropsEqual,
-        areOwnPropsEqual = _ref3$areOwnPropsEqua === void 0 ? _shallowEqual["default"] : _ref3$areOwnPropsEqua,
-        _ref3$areStatePropsEq = _ref3.areStatePropsEqual,
-        areStatePropsEqual = _ref3$areStatePropsEq === void 0 ? _shallowEqual["default"] : _ref3$areStatePropsEq,
-        _ref3$areMergedPropsE = _ref3.areMergedPropsEqual,
-        areMergedPropsEqual = _ref3$areMergedPropsE === void 0 ? _shallowEqual["default"] : _ref3$areMergedPropsE,
-        extraOptions = (0, _objectWithoutPropertiesLoose2["default"])(_ref3, ["pure", "areStatesEqual", "areOwnPropsEqual", "areStatePropsEqual", "areMergedPropsEqual"]);
-    var initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps');
-    var initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories, 'mapDispatchToProps');
-    var initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps');
-    return connectHOC(selectorFactory, (0, _extends2["default"])({
-      // used in error messages
-      methodName: 'connect',
-      // used to compute Connect's displayName from the wrapped component's displayName.
-      getDisplayName: function getDisplayName(name) {
-        return "Connect(" + name + ")";
-      },
-      // if mapStateToProps is falsy, the Connect component doesn't subscribe to store state changes
-      shouldHandleStateChanges: Boolean(mapStateToProps),
-      // passed through to selectorFactory
-      initMapStateToProps: initMapStateToProps,
-      initMapDispatchToProps: initMapDispatchToProps,
-      initMergeProps: initMergeProps,
-      pure: pure,
-      areStatesEqual: areStatesEqual,
-      areOwnPropsEqual: areOwnPropsEqual,
-      areStatePropsEqual: areStatePropsEqual,
-      areMergedPropsEqual: areMergedPropsEqual
-    }, extraOptions));
-  };
-}
-
-var _default = /*#__PURE__*/createConnect();
-
-exports["default"] = _default;
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","../components/connectAdvanced":"SPrTN","../utils/shallowEqual":"1BbL9","./mapDispatchToProps":"aHbco","./mapStateToProps":"6esSH","./mergeProps":"4XiYM","./selectorFactory":"XQRNr"}],"1BbL9":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = shallowEqual;
-
-function is(x, y) {
-  if (x === y) {
-    return x !== 0 || y !== 0 || 1 / x === 1 / y;
-  } else {
-    return x !== x && y !== y;
-  }
-}
-
-function shallowEqual(objA, objB) {
-  if (is(objA, objB)) return true;
-
-  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-  if (keysA.length !== keysB.length) return false;
-
-  for (var i = 0; i < keysA.length; i++) {
-    if (!Object.prototype.hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-},{}],"aHbco":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-exports.whenMapDispatchToPropsIsFunction = whenMapDispatchToPropsIsFunction;
-exports.whenMapDispatchToPropsIsMissing = whenMapDispatchToPropsIsMissing;
-exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
-exports["default"] = void 0;
-
-var _bindActionCreators = _interopRequireDefault(require("../utils/bindActionCreators"));
-
-var _wrapMapToProps = require("./wrapMapToProps");
-
-function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
-  return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
-}
-
-function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
-  return !mapDispatchToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
-    return {
-      dispatch: dispatch
-    };
-  }) : undefined;
-}
-
-function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
-  return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function (dispatch) {
-    return (0, _bindActionCreators["default"])(mapDispatchToProps, dispatch);
-  }) : undefined;
-}
-
-var _default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
-exports["default"] = _default;
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","../utils/bindActionCreators":"21ucm","./wrapMapToProps":"7rpe9"}],"21ucm":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = bindActionCreators;
-
-function bindActionCreators(actionCreators, dispatch) {
-  var boundActionCreators = {};
-
-  var _loop = function _loop(key) {
-    var actionCreator = actionCreators[key];
-
-    if (typeof actionCreator === 'function') {
-      boundActionCreators[key] = function () {
-        return dispatch(actionCreator.apply(void 0, arguments));
-      };
-    }
-  };
-
-  for (var key in actionCreators) {
-    _loop(key);
-  }
-
-  return boundActionCreators;
-}
-},{}],"7rpe9":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports.wrapMapToPropsConstant = wrapMapToPropsConstant;
-exports.getDependsOnOwnProps = getDependsOnOwnProps;
-exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
-var _verifyPlainObject = _interopRequireDefault(require("../utils/verifyPlainObject"));
-function wrapMapToPropsConstant(getConstant) {
-  return function initConstantSelector(dispatch, options) {
-    var constant = getConstant(dispatch, options);
-    function constantSelector() {
-      return constant;
-    }
-    constantSelector.dependsOnOwnProps = false;
-    return constantSelector;
-  };
-}
-// dependsOnOwnProps is used by createMapToPropsProxy to determine whether to pass props as args
-// to the mapToProps function being wrapped. It is also used by makePurePropsSelector to determine
-// whether mapToProps needs to be invoked when props have changed.
-// 
-// A length of one signals that mapToProps does not depend on props from the parent component.
-// A length of zero is assumed to mean mapToProps is getting args via arguments or ...args and
-// therefore not reporting its length accurately..
-function getDependsOnOwnProps(mapToProps) {
-  return mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined ? Boolean(mapToProps.dependsOnOwnProps) : mapToProps.length !== 1;
-}
-// Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
-// this function wraps mapToProps in a proxy function which does several things:
-// 
-// * Detects whether the mapToProps function being called depends on props, which
-// is used by selectorFactory to decide if it should reinvoke on props changes.
-// 
-// * On first call, handles mapToProps if returns another function, and treats that
-// new function as the true mapToProps for subsequent calls.
-// 
-// * On first call, verifies the first result is a plain object, in order to warn
-// the developer that their mapToProps function is not returning a valid result.
-// 
-function wrapMapToPropsFunc(mapToProps, methodName) {
-  return function initProxySelector(dispatch, _ref) {
-    var displayName = _ref.displayName;
-    var proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
-      return proxy.dependsOnOwnProps ? proxy.mapToProps(stateOrDispatch, ownProps) : proxy.mapToProps(stateOrDispatch);
-    };
-    // allow detectFactoryAndVerify to get ownProps
-    proxy.dependsOnOwnProps = true;
-    proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
-      proxy.mapToProps = mapToProps;
-      proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps);
-      var props = proxy(stateOrDispatch, ownProps);
-      if (typeof props === 'function') {
-        proxy.mapToProps = props;
-        proxy.dependsOnOwnProps = getDependsOnOwnProps(props);
-        props = proxy(stateOrDispatch, ownProps);
-      }
-      if ("development" !== 'production') (0, _verifyPlainObject["default"])(props, displayName, methodName);
-      return props;
-    };
-    return proxy;
-  };
-}
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","../utils/verifyPlainObject":"4G4Zn"}],"4G4Zn":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-exports["default"] = verifyPlainObject;
-
-var _isPlainObject = _interopRequireDefault(require("./isPlainObject"));
-
-var _warning = _interopRequireDefault(require("./warning"));
-
-function verifyPlainObject(value, displayName, methodName) {
-  if (!(0, _isPlainObject["default"])(value)) {
-    (0, _warning["default"])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
-  }
-}
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","./isPlainObject":"Gqg7l","./warning":"2YNtu"}],"Gqg7l":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = isPlainObject;
-
-/**
- * @param {any} obj The object to inspect.
- * @returns {boolean} True if the argument appears to be a plain object.
- */
-function isPlainObject(obj) {
-  if (typeof obj !== 'object' || obj === null) return false;
-  var proto = Object.getPrototypeOf(obj);
-  if (proto === null) return true;
-  var baseProto = proto;
-
-  while (Object.getPrototypeOf(baseProto) !== null) {
-    baseProto = Object.getPrototypeOf(baseProto);
-  }
-
-  return proto === baseProto;
-}
-},{}],"2YNtu":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports["default"] = warning;
-
-/**
- * Prints a warning in the console if it exists.
- *
- * @param {String} message The warning message.
- * @returns {void}
- */
-function warning(message) {
-  /* eslint-disable no-console */
-  if (typeof console !== 'undefined' && typeof console.error === 'function') {
-    console.error(message);
-  }
-  /* eslint-enable no-console */
-
-
-  try {
-    // This error was thrown as a convenience so that if you enable
-    // "break on all exceptions" in your console,
-    // it would pause the execution at this line.
-    throw new Error(message);
-    /* eslint-disable no-empty */
-  } catch (e) {}
-  /* eslint-enable no-empty */
-
-}
-},{}],"6esSH":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
-exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
-exports["default"] = void 0;
-
-var _wrapMapToProps = require("./wrapMapToProps");
-
-function whenMapStateToPropsIsFunction(mapStateToProps) {
-  return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
-}
-
-function whenMapStateToPropsIsMissing(mapStateToProps) {
-  return !mapStateToProps ? (0, _wrapMapToProps.wrapMapToPropsConstant)(function () {
-    return {};
-  }) : undefined;
-}
-
-var _default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
-exports["default"] = _default;
-},{"./wrapMapToProps":"7rpe9"}],"4XiYM":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports.defaultMergeProps = defaultMergeProps;
-exports.wrapMergePropsFunc = wrapMergePropsFunc;
-exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
-exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
-exports["default"] = void 0;
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-var _verifyPlainObject = _interopRequireDefault(require("../utils/verifyPlainObject"));
-function defaultMergeProps(stateProps, dispatchProps, ownProps) {
-  return (0, _extends2["default"])({}, ownProps, stateProps, dispatchProps);
-}
-function wrapMergePropsFunc(mergeProps) {
-  return function initMergePropsProxy(dispatch, _ref) {
-    var displayName = _ref.displayName, pure = _ref.pure, areMergedPropsEqual = _ref.areMergedPropsEqual;
-    var hasRunOnce = false;
-    var mergedProps;
-    return function mergePropsProxy(stateProps, dispatchProps, ownProps) {
-      var nextMergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-      if (hasRunOnce) {
-        if (!pure || !areMergedPropsEqual(nextMergedProps, mergedProps)) mergedProps = nextMergedProps;
-      } else {
-        hasRunOnce = true;
-        mergedProps = nextMergedProps;
-        if ("development" !== 'production') (0, _verifyPlainObject["default"])(mergedProps, displayName, 'mergeProps');
-      }
-      return mergedProps;
-    };
-  };
-}
-function whenMergePropsIsFunction(mergeProps) {
-  return typeof mergeProps === 'function' ? wrapMergePropsFunc(mergeProps) : undefined;
-}
-function whenMergePropsIsOmitted(mergeProps) {
-  return !mergeProps ? function () {
-    return defaultMergeProps;
-  } : undefined;
-}
-var _default = [whenMergePropsIsFunction, whenMergePropsIsOmitted];
-exports["default"] = _default;
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","../utils/verifyPlainObject":"4G4Zn"}],"XQRNr":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports.impureFinalPropsSelectorFactory = impureFinalPropsSelectorFactory;
-exports.pureFinalPropsSelectorFactory = pureFinalPropsSelectorFactory;
-exports["default"] = finalPropsSelectorFactory;
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-var _verifySubselectors = _interopRequireDefault(require("./verifySubselectors"));
-function impureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch) {
-  return function impureFinalPropsSelector(state, ownProps) {
-    return mergeProps(mapStateToProps(state, ownProps), mapDispatchToProps(dispatch, ownProps), ownProps);
-  };
-}
-function pureFinalPropsSelectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, _ref) {
-  var areStatesEqual = _ref.areStatesEqual, areOwnPropsEqual = _ref.areOwnPropsEqual, areStatePropsEqual = _ref.areStatePropsEqual;
-  var hasRunAtLeastOnce = false;
-  var state;
-  var ownProps;
-  var stateProps;
-  var dispatchProps;
-  var mergedProps;
-  function handleFirstCall(firstState, firstOwnProps) {
-    state = firstState;
-    ownProps = firstOwnProps;
-    stateProps = mapStateToProps(state, ownProps);
-    dispatchProps = mapDispatchToProps(dispatch, ownProps);
-    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    hasRunAtLeastOnce = true;
-    return mergedProps;
-  }
-  function handleNewPropsAndNewState() {
-    stateProps = mapStateToProps(state, ownProps);
-    if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    return mergedProps;
-  }
-  function handleNewProps() {
-    if (mapStateToProps.dependsOnOwnProps) stateProps = mapStateToProps(state, ownProps);
-    if (mapDispatchToProps.dependsOnOwnProps) dispatchProps = mapDispatchToProps(dispatch, ownProps);
-    mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    return mergedProps;
-  }
-  function handleNewState() {
-    var nextStateProps = mapStateToProps(state, ownProps);
-    var statePropsChanged = !areStatePropsEqual(nextStateProps, stateProps);
-    stateProps = nextStateProps;
-    if (statePropsChanged) mergedProps = mergeProps(stateProps, dispatchProps, ownProps);
-    return mergedProps;
-  }
-  function handleSubsequentCalls(nextState, nextOwnProps) {
-    var propsChanged = !areOwnPropsEqual(nextOwnProps, ownProps);
-    var stateChanged = !areStatesEqual(nextState, state);
-    state = nextState;
-    ownProps = nextOwnProps;
-    if (propsChanged && stateChanged) return handleNewPropsAndNewState();
-    if (propsChanged) return handleNewProps();
-    if (stateChanged) return handleNewState();
-    return mergedProps;
-  }
-  return function pureFinalPropsSelector(nextState, nextOwnProps) {
-    return hasRunAtLeastOnce ? handleSubsequentCalls(nextState, nextOwnProps) : handleFirstCall(nextState, nextOwnProps);
-  };
-}
-// TODO: Add more comments
-// If pure is true, the selector returned by selectorFactory will memoize its results,
-// allowing connectAdvanced's shouldComponentUpdate to return false if final
-// props have not changed. If false, the selector will always return a new
-// object and shouldComponentUpdate will always return true.
-function finalPropsSelectorFactory(dispatch, _ref2) {
-  var initMapStateToProps = _ref2.initMapStateToProps, initMapDispatchToProps = _ref2.initMapDispatchToProps, initMergeProps = _ref2.initMergeProps, options = (0, _objectWithoutPropertiesLoose2["default"])(_ref2, ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"]);
-  var mapStateToProps = initMapStateToProps(dispatch, options);
-  var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
-  var mergeProps = initMergeProps(dispatch, options);
-  if ("development" !== 'production') {
-    (0, _verifySubselectors["default"])(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
-  }
-  var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
-  return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
-}
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","./verifySubselectors":"5MUxF"}],"5MUxF":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-exports["default"] = verifySubselectors;
-
-var _warning = _interopRequireDefault(require("../utils/warning"));
-
-function verify(selector, methodName, displayName) {
-  if (!selector) {
-    throw new Error("Unexpected value for " + methodName + " in " + displayName + ".");
-  } else if (methodName === 'mapStateToProps' || methodName === 'mapDispatchToProps') {
-    if (!Object.prototype.hasOwnProperty.call(selector, 'dependsOnOwnProps')) {
-      (0, _warning["default"])("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
-    }
-  }
-}
-
-function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, displayName) {
-  verify(mapStateToProps, 'mapStateToProps', displayName);
-  verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
-  verify(mergeProps, 'mergeProps', displayName);
-}
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","../utils/warning":"2YNtu"}],"4H7HK":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports.createDispatchHook = createDispatchHook;
-exports.useDispatch = void 0;
-
-var _Context = require("../components/Context");
-
-var _useStore = require("./useStore");
-
-/**
- * Hook factory, which creates a `useDispatch` hook bound to a given context.
- *
- * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
- * @returns {Function} A `useDispatch` hook bound to the specified context.
- */
-function createDispatchHook(context) {
-  if (context === void 0) {
-    context = _Context.ReactReduxContext;
-  }
-
-  var useStore = context === _Context.ReactReduxContext ? _useStore.useStore : (0, _useStore.createStoreHook)(context);
-  return function useDispatch() {
-    var store = useStore();
-    return store.dispatch;
-  };
-}
-/**
- * A hook to access the redux `dispatch` function.
- *
- * @returns {any|function} redux store's `dispatch` function
- *
- * @example
- *
- * import React, { useCallback } from 'react'
- * import { useDispatch } from 'react-redux'
- *
- * export const CounterComponent = ({ value }) => {
- *   const dispatch = useDispatch()
- *   const increaseCounter = useCallback(() => dispatch({ type: 'increase-counter' }), [])
- *   return (
- *     <div>
- *       <span>{value}</span>
- *       <button onClick={increaseCounter}>Increase counter</button>
- *     </div>
- *   )
- * }
- */
-
-
-var useDispatch = /*#__PURE__*/createDispatchHook();
-exports.useDispatch = useDispatch;
-},{"../components/Context":"6ScOK","./useStore":"5zPKn"}],"5zPKn":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports.createStoreHook = createStoreHook;
-exports.useStore = void 0;
-
-var _react = require("react");
-
-var _Context = require("../components/Context");
-
-var _useReduxContext2 = require("./useReduxContext");
-
-/**
- * Hook factory, which creates a `useStore` hook bound to a given context.
- *
- * @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
- * @returns {Function} A `useStore` hook bound to the specified context.
- */
-function createStoreHook(context) {
-  if (context === void 0) {
-    context = _Context.ReactReduxContext;
-  }
-
-  var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
-    return (0, _react.useContext)(context);
-  };
-  return function useStore() {
-    var _useReduxContext = useReduxContext(),
-        store = _useReduxContext.store;
-
-    return store;
-  };
-}
-/**
- * A hook to access the redux store.
- *
- * @returns {any} the redux store
- *
- * @example
- *
- * import React from 'react'
- * import { useStore } from 'react-redux'
- *
- * export const ExampleComponent = () => {
- *   const store = useStore()
- *   return <div>{store.getState()}</div>
- * }
- */
-
-
-var useStore = /*#__PURE__*/createStoreHook();
-exports.useStore = useStore;
-},{"react":"3b2NM","../components/Context":"6ScOK","./useReduxContext":"46ppV"}],"46ppV":[function(require,module,exports) {
-"use strict";
-exports.__esModule = true;
-exports.useReduxContext = useReduxContext;
-var _react = require("react");
-var _Context = require("../components/Context");
-/**
-* A hook to access the value of the `ReactReduxContext`. This is a low-level
-* hook that you should usually not need to call directly.
-*
-* @returns {any} the value of the `ReactReduxContext`
-*
-* @example
-*
-* import React from 'react'
-* import { useReduxContext } from 'react-redux'
-*
-* export const CounterComponent = ({ value }) => {
-*   const { store } = useReduxContext()
-*   return <div>{store.getState()}</div>
-* }
-*/
-function useReduxContext() {
-  var contextValue = (0, _react.useContext)(_Context.ReactReduxContext);
-  if ("development" !== 'production' && !contextValue) {
-    throw new Error('could not find react-redux context value; please ensure the component is wrapped in a <Provider>');
-  }
-  return contextValue;
-}
-
-},{"react":"3b2NM","../components/Context":"6ScOK"}],"6dv0a":[function(require,module,exports) {
-"use strict";
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-exports.__esModule = true;
-exports.createSelectorHook = createSelectorHook;
-exports.useSelector = void 0;
-var _react = require("react");
-var _useReduxContext2 = require("./useReduxContext");
-var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
-var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
-var _Context = require("../components/Context");
-var refEquality = function refEquality(a, b) {
-  return a === b;
-};
-function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub) {
-  var _useReducer = (0, _react.useReducer)(function (s) {
-    return s + 1;
-  }, 0), forceRender = _useReducer[1];
-  var subscription = (0, _react.useMemo)(function () {
-    return new _Subscription["default"](store, contextSub);
-  }, [store, contextSub]);
-  var latestSubscriptionCallbackError = (0, _react.useRef)();
-  var latestSelector = (0, _react.useRef)();
-  var latestStoreState = (0, _react.useRef)();
-  var latestSelectedState = (0, _react.useRef)();
-  var storeState = store.getState();
-  var selectedState;
-  try {
-    if (selector !== latestSelector.current || storeState !== latestStoreState.current || latestSubscriptionCallbackError.current) {
-      var newSelectedState = selector(storeState);
-      // ensure latest selected state is reused so that a custom equality function can result in identical references
-      if (latestSelectedState.current === undefined || !equalityFn(newSelectedState, latestSelectedState.current)) {
-        selectedState = newSelectedState;
-      } else {
-        selectedState = latestSelectedState.current;
-      }
-    } else {
-      selectedState = latestSelectedState.current;
-    }
-  } catch (err) {
-    if (latestSubscriptionCallbackError.current) {
-      err.message += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\n";
-    }
-    throw err;
-  }
-  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
-    latestSelector.current = selector;
-    latestStoreState.current = storeState;
-    latestSelectedState.current = selectedState;
-    latestSubscriptionCallbackError.current = undefined;
-  });
-  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
-    function checkForUpdates() {
-      try {
-        var newStoreState = store.getState();
-        var _newSelectedState = latestSelector.current(newStoreState);
-        if (equalityFn(_newSelectedState, latestSelectedState.current)) {
-          return;
-        }
-        latestSelectedState.current = _newSelectedState;
-        latestStoreState.current = newStoreState;
-      } catch (err) {
-        // we ignore all errors here, since when the component
-        // is re-rendered, the selectors are called again, and
-        // will throw again, if neither props nor store state
-        // changed
-        latestSubscriptionCallbackError.current = err;
-      }
-      forceRender();
-    }
-    subscription.onStateChange = checkForUpdates;
-    subscription.trySubscribe();
-    checkForUpdates();
-    return function () {
-      return subscription.tryUnsubscribe();
-    };
-  }, [store, subscription]);
-  return selectedState;
-}
-/**
-* Hook factory, which creates a `useSelector` hook bound to a given context.
-*
-* @param {React.Context} [context=ReactReduxContext] Context passed to your `<Provider>`.
-* @returns {Function} A `useSelector` hook bound to the specified context.
-*/
-function createSelectorHook(context) {
-  if (context === void 0) {
-    context = _Context.ReactReduxContext;
-  }
-  var useReduxContext = context === _Context.ReactReduxContext ? _useReduxContext2.useReduxContext : function () {
-    return (0, _react.useContext)(context);
-  };
-  return function useSelector(selector, equalityFn) {
-    if (equalityFn === void 0) {
-      equalityFn = refEquality;
-    }
-    if ("development" !== 'production') {
-      if (!selector) {
-        throw new Error("You must pass a selector to useSelector");
-      }
-      if (typeof selector !== 'function') {
-        throw new Error("You must pass a function as a selector to useSelector");
-      }
-      if (typeof equalityFn !== 'function') {
-        throw new Error("You must pass a function as an equality function to useSelector");
-      }
-    }
-    var _useReduxContext = useReduxContext(), store = _useReduxContext.store, contextSub = _useReduxContext.subscription;
-    var selectedState = useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub);
-    (0, _react.useDebugValue)(selectedState);
-    return selectedState;
-  };
-}
-/**
-* A hook to access the redux store's state. This hook takes a selector function
-* as an argument. The selector is called with the store state.
-*
-* This hook takes an optional equality comparison function as the second parameter
-* that allows you to customize the way the selected state is compared to determine
-* whether the component needs to be re-rendered.
-*
-* @param {Function} selector the selector function
-* @param {Function=} equalityFn the function that will be used to determine equality
-*
-* @returns {any} the selected state
-*
-* @example
-*
-* import React from 'react'
-* import { useSelector } from 'react-redux'
-*
-* export const CounterComponent = () => {
-*   const counter = useSelector(state => state.counter)
-*   return <div>{counter}</div>
-* }
-*/
-var useSelector = /*#__PURE__*/createSelectorHook();
-exports.useSelector = useSelector;
-
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","react":"3b2NM","./useReduxContext":"46ppV","../utils/Subscription":"Y1J0m","../utils/useIsomorphicLayoutEffect":"64Bcp","../components/Context":"6ScOK"}],"12gEH":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-exports.unstable_batchedUpdates = void 0;
-
-var _reactDom = require("react-dom");
-
-exports.unstable_batchedUpdates = _reactDom.unstable_batchedUpdates;
-},{"react-dom":"2sg1U"}],"5S6cN":[function(require,module,exports) {
-var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-_parcelHelpers.defineInteropFlag(exports);
-_parcelHelpers.export(exports, "SET_MOVIES", function () {
-  return SET_MOVIES;
-});
-_parcelHelpers.export(exports, "SET_FILTER", function () {
-  return SET_FILTER;
-});
-_parcelHelpers.export(exports, "SET_USER", function () {
-  return SET_USER;
-});
-_parcelHelpers.export(exports, "SET_FAVORITES", function () {
-  return SET_FAVORITES;
-});
-_parcelHelpers.export(exports, "setMovies", function () {
-  return setMovies;
-});
-_parcelHelpers.export(exports, "setFilter", function () {
-  return setFilter;
-});
-_parcelHelpers.export(exports, "setUser", function () {
-  return setUser;
-});
-_parcelHelpers.export(exports, "setFavorites", function () {
-  return setFavorites;
-});
-const SET_MOVIES = 'SET_MOVIES';
-const SET_FILTER = 'SET_FILTER';
-const SET_USER = 'SET_USER';
-const SET_FAVORITES = 'SET_FAVORITES';
-function setMovies(value) {
-  return {
-    type: SET_MOVIES,
-    value
-  };
-}
-function setFilter(value) {
-  return {
-    type: SET_FILTER,
-    value
-  };
-}
-function setUser(value) {
-  return {
-    type: SET_USER,
-    value
-  };
-}
-function setFavorites(value) {
-  return {
-    type: SET_FAVORITES,
-    value
-  };
-}
-
-},{"@parcel/transformer-js/lib/esmodule-helpers.js":"1JoO6"}],"LSFfJ":[function(require,module,exports) {
+},{"./bundle-url":"5IoJv"}],"3kYjk":[function() {},{}],"LSFfJ":[function(require,module,exports) {
 'use strict';
 
 exports.__esModule = true;
