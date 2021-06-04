@@ -1,0 +1,20 @@
+#submit-button {
+  margin: 25px;
+}
+
+#membership {
+  margin: 5px;
+}
+
+.login-form {
+  border: #cfd4d9 1px solid;
+  border-radius: 8%;
+  display: inline;
+  padding: 25px;
+  margin: 25px;
+  text-align: center;
+}
+
+.form-control {
+  width: 50%;
+}

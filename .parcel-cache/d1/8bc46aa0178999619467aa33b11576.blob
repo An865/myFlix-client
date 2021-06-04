@@ -1,0 +1,16 @@
+form {
+  display: block;
+  margin: 0;
+}
+
+#submit-button {
+  margin: 25px;
+}
+
+#membership {
+  margin: 5px;
+}
+
+.form-control {
+  width: 50%;
+}

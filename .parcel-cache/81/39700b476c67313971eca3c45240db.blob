@@ -1,0 +1,26 @@
+.my-flix {
+  color: steelblue;
+}
+
+form {
+  display: block;
+  margin: 0;
+}
+
+button {
+  margin: 25px;
+}
+
+.left {
+  text-align: left;
+  margin-left: 40px;
+  width: 15px;
+}
+
+.right {
+  text-align: right;
+}
+.card-body {
+  margin: 10px;
+}
+/*# sourceMappingURL=index.HASH_REF_709257314ed7c59246c4f4ddd22b8a02.css.map */

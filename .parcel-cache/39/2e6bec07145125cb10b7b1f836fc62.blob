@@ -1,0 +1,21 @@
+form {
+  margin: auto;
+}
+
+#submit-button {
+  margin: 25px;
+}
+
+#membership {
+  margin: 5px;
+}
+
+.login-form {
+  border: black 1px solid;
+  display: inline-block;
+  padding: 25px;
+}
+
+.form-control {
+  width: 50% !important;
+}

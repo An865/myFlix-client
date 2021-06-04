@@ -6,10 +6,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 //Bootstrap components
 import { Navbar, Nav, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-// #0 import actions
 import { setMovies, setUser, setFavorites } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
-/*  #1 The rest of components import statements */
 //myFlix components
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -22,7 +20,6 @@ import './main-view.scss';
 //Images
 import logo from 'url:../../assets/images/MyFlix.png';
 
-// #2 export keyword removed from here
 class MainView extends React.Component {
     //constructor is responsible for initializing this.state and creating component
     constructor() {
@@ -41,8 +38,6 @@ class MainView extends React.Component {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                // Assign the result to the state
-                // #4
                 this.props.setMovies(response.data);
             })
             .catch(function (error) {
@@ -80,7 +75,7 @@ class MainView extends React.Component {
 
     //render returns visual representation of component
     render() {
-        // #5 movies and user are extracted from this.props rather than from the this.state
+        // movies and user are extracted from this.props rather than from the this.state
         let { movies, user, favorites } = this.props;
 
         return (
@@ -133,7 +128,6 @@ class MainView extends React.Component {
                                 );
                             if (movies.length === 0)
                                 return <div className="main-view" />;
-                            // #6
                             return <MoviesList movies={movies} />;
                         }}
                     />
@@ -231,7 +225,7 @@ class MainView extends React.Component {
     }
 }
 
-/* #7 recieves redux state and uses it as props in component */
+/* recieves redux state and uses it as props in component */
 let mapStateToProps = (state) => {
     return {
         movies: state.movies,
@@ -240,7 +234,7 @@ let mapStateToProps = (state) => {
     };
 };
 
-/* #8  while exporting we connect mapStateToProps and setMovies with MainView*/
+/* while exporting we connect mapStateToProps and setMovies with MainView*/
 export default connect(mapStateToProps, { setMovies, setUser, setFavorites })(
     MainView
 );

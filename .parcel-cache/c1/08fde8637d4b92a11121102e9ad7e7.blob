@@ -1,0 +1,9 @@
+form {
+  display: block;
+  margin: 0;
+}
+
+button {
+  color: red;
+  margin: 25px;
+}

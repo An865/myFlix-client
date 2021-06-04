@@ -1,0 +1,8 @@
+form {
+  display: block;
+  margin: 0;
+}
+
+Button {
+  margin: 25px;
+}

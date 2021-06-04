@@ -1,0 +1,37 @@
+.my-flix {
+  color: steelblue;
+}
+
+form {
+  margin: auto;
+}
+
+#submit-button {
+  margin: 25px;
+}
+
+#membership {
+  margin: 5px;
+}
+
+.form {
+  border: black 1px solid;
+}
+
+.form-control {
+  width: 50% !important;
+}
+
+.left {
+  text-align: left;
+  margin-left: 40px;
+  width: 15px;
+}
+
+.right {
+  text-align: right;
+}
+.card-body {
+  margin: 10px;
+}
+/*# sourceMappingURL=index.HASH_REF_709257314ed7c59246c4f4ddd22b8a02.css.map */

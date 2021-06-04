@@ -1,0 +1,20 @@
+form {
+  margin: auto;
+}
+
+#submit-button {
+  margin: 25px;
+}
+
+#membership {
+  margin: 5px;
+}
+
+.form-group {
+  margin: auto !important;
+  border: black 1px solid;
+}
+
+.form-control {
+  width: 50% !important;
+}

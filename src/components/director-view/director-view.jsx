@@ -1,6 +1,6 @@
 /* Packages and Bootstrap Components */
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 /* Functional Component for Director Data */
@@ -30,3 +30,8 @@ export function DirectorView(props) {
         </div>
     );
 }
+//establish property types
+DirectorView.propTypes = {
+    director: PropTypes.string.isRequired,
+    onBackClick: PropTypes.func.isRequired,
+};

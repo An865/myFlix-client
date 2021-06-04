@@ -1,5 +1,6 @@
 /* Packages */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Col from 'react-bootstrap/Col';
 import { connect } from 'react-redux';
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
@@ -39,3 +40,9 @@ function MoviesList(props) {
 
 /* connect mapStateToProps to MoviesList component */
 export default connect(mapStateToProps)(MoviesList);
+
+//establish property types
+MoviesList.propTypes = {
+    movies: PropTypes.array.isRequired,
+    visibilityFilter: PropTypes.string.isRequired,
+};

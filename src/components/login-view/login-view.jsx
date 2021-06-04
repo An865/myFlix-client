@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+//Styling
+import './login-view.scss';
 
 /* Functional Component for Login View  */
 export function LoginView(props) {
@@ -30,7 +31,7 @@ export function LoginView(props) {
     };
 
     return (
-        <Form>
+        <Form className="login-form">
             <Form.Group controlId="formBasicUsername">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -50,12 +51,17 @@ export function LoginView(props) {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={handleSubmit}>
+            <Button
+                id="submit-button"
+                variant="primary"
+                type="submit"
+                onClick={handleSubmit}
+            >
                 Submit
             </Button>
-            <Link to={`/register`}>
-                <Button variant="link">Register Now</Button>
-            </Link>
+
+            <span id="membership">Not yet a member? </span>
+            <Link to={`/register`}>Register Now</Link>
         </Form>
     );
 }

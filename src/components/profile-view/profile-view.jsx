@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 // Bootstrap Components
 import { Button, Form } from 'react-bootstrap';
 //Images and Styling
@@ -84,7 +84,6 @@ export function ProfileView(props) {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                // console.log(response.data.FavoriteMovies);
                 dispatch({
                     type: SET_FAVORITES,
                     value: response.data.FavoriteMovies,
@@ -233,3 +232,9 @@ export function ProfileView(props) {
         </div>
     ); //end return
 } //end export functional component
+
+//establish property types
+ProfileView.propTypes = {
+    movies: PropTypes.array.isRequired,
+    onBackClick: PropTypes.func.isRequired,
+};

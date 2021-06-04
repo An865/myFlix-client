@@ -1,6 +1,7 @@
 /* Packages and Bootstrap */
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 /* Functional Component for Genre Data */
 export function GenreView(props) {
@@ -21,3 +22,9 @@ export function GenreView(props) {
         </div>
     );
 }
+
+//establish property types
+GenreView.propTypes = {
+    genre: PropTypes.string.isRequired,
+    onBackClick: PropTypes.func.isRequired,
+};
